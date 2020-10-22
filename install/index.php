@@ -7,7 +7,7 @@ session_start();
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+	<link rel="icon" sizes="212x212" href="../assets/img/icon.png">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="../assets/css/application.css">
@@ -15,10 +15,19 @@ session_start();
 	<title>_webEvent - Instalador</title>
 </head>
 <body class="instalador">
+	<?php
+	 include_once("../connect/connect.php")
+	?>
 	<div class="container">
+		<!--
+			Região do SideBar
+			#Criação de uma região monitorando as etapas concluídas
+			#Região não permite clice ou Rollback de etapas
+			#Região sobrepondo outra divs, sem responsividade
+		 -->
 		<div class="row">
 			<!-- Sidebar -->
-			<div class="col-md-3">
+			<!-- <div class="col-md-3">
 				<div class="sidebar">
 					<img src="../assets/img/logo_b.png" alt="">
 					<ul class="list-group">
@@ -60,7 +69,7 @@ session_start();
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- Campos -->
 			<div class="col-md-9 campos">
@@ -80,7 +89,15 @@ session_start();
 									<label for="cliente" class="form-label">Lista de Clientes</label>
 									<select class="form-select" id="cliente" name="cliente_id" required="true">
 										<option selected disabled value="">Selecionar...</option>
-										<option>...</option>
+										<?php
+											# Região de listagem da lista de dados
+											$sql=("SELECT nome from clientes");
+											$consultaNome=mysqli_query($link,$sql);
+											while($dadosClientes=mysqli_fetch_array($consultaNome)){
+												$nome=$dadosClientes[0];
+												echo "<option>".$nome."</option>";
+											}
+										?>
 									</select>
 								</div>
 							</div>
