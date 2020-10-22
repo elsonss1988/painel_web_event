@@ -4,7 +4,7 @@ session_start();
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<!-- Required meta tags -->
+	<!-- Required meta tags  -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" sizes="212x212" href="../assets/img/icon.png">
