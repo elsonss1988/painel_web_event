@@ -1,6 +1,6 @@
 # Live Wizard to WebEvent
 
-[![_webevent]("../../assets/img/logo.png)]
+![_webevent]("../../assets/img/logo.png)
 ## Observações
 
 Check as configurações setadas em BD com o seu BD
@@ -8,13 +8,13 @@ Check as configurações setadas em BD com o seu BD
 
 ## Pendencias
 
-- [] Adiciona dados de interação
-- [] Adiciona transmissão
-- [] Adiciona cadastro
-- [] Adiciona login
-- [] Adiciona mensagens
-- [] Dashboard
-- [] Separa imagens carregadas das imagens do projeto
+- [ ] Adiciona dados de interação
+- [ ] Adiciona transmissão
+- [ ] Adiciona cadastro
+- [ ] Adiciona login
+- [ ] Adiciona mensagens
+- [ ] Dashboard
+- [ ] Separa imagens carregadas das imagens do projeto
 
 
 
