@@ -27,7 +27,7 @@ session_start();
 		 -->
 		<div class="row">
 			<!-- Sidebar -->
-			<!-- <div class="col-md-3">
+			<div class="col-md-3">
 				<div class="sidebar">
 					<img src="../assets/img/logo_b.png" alt="">
 					<ul class="list-group">
@@ -69,7 +69,7 @@ session_start();
 						</li>
 					</ul>
 				</div>
-			</div> -->
+			</div>
 			
 			<!-- Campos -->
 			<div class="col-md-9 campos">
