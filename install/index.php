@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION['etapa'] =4;
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -25,6 +26,7 @@ session_start();
 			#Região não permite clice ou Rollback de etapas
 			#Região sobrepondo outra divs, sem responsividade
 		 -->
+		 <script> console.log(window)</script>
 		<div class="row">
 			<!-- Sidebar -->
 			<div class="col-md-3">
@@ -292,7 +294,7 @@ session_start();
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
 								<label class="form-check-label" for="tipo_de_cadastro"><b>Habilitar Cadastro</b></label>
-								<input class="form-check-input" type="checkbox" id="tipo_de_cadastro" checked  ">
+								<input class="form-check-input" type="checkbox" id="tipo_de_cadastro" checked onchange="checkbox_fields('cadastro')">
 							</div>
 							<div class="row g-3" id="campos_mostrar_cadastro">
 								<hr>
@@ -487,9 +489,19 @@ session_start();
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
+								
+						<!-- Reigão de Manipulação do retornar-->
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 					</div>
 				</form>
+
+				<!-- Região de Manipulação do retornar-->
+				<!-- <?php 
+					if($_SESSION['etapa'] > 1){
+						#--$_SESSION['etapa'];									
+						echo '<button class="btn btn-primary"  onclick="console.log(window)">'.'Retornar'.'</button>';
+					};
+				?> -->
 				
 				<!-- Add Usuário -->
 				<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
@@ -677,6 +689,8 @@ session_start();
 				}
 			}
 		}
+
+		// esse igual a ação de OOP this
 		function exibe(esse, id_campo){
 			var esse = document.getElementById(esse);
 			var id_campo = document.getElementById(id_campo);

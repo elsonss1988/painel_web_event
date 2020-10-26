@@ -142,6 +142,12 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
+if($f == 'retorno'){
+    echo "*******************************";
+    --$_SESSION['etapa'];
+    header('Location: ../install/');
+}
+
 // Adiciona dados de interação
 function add_interacao(){
     require '../connect/connect.php';
@@ -167,4 +173,5 @@ function add_mensagens(){
     require '../connect/connect.php';
 }
 
-?>
+
+
