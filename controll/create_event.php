@@ -127,6 +127,32 @@ if($etapa == 2){
         }
     }
 }
+
+if($etapa == 3){
+    $evento_id = $_SESSION['evento_id'];
+    $insert_linha_configuracao = insert_linha_configuracao($evento_id);
+    
+    if(!isset($_GET['f'])){
+        $f = "";
+    } else{
+        $f = mysqli_real_escape_string($link, $_GET['f']);
+    }
+
+    if(isset($_POST['interacao_perguntas'])){
+        $interacao_perguntas = 1;
+    }
+    else{
+        $interacao_perguntas = 0;
+    }
+    
+    $interacao_codigo = mysqli_real_escape_string($link, $_POST['interacao_codigo']);
+    $transmissao_player1 = mysqli_real_escape_string($link, $_POST['transmissao_player1']);
+    $transmissao_player2 = mysqli_real_escape_string($link, $_POST['transmissao_player2']);
+    $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
+    $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
+    $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
+    $_SESSION['etapa'] = 4;
+}
 header('Location: ../install/');
 
 ?>
