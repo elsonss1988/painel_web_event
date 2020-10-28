@@ -183,8 +183,15 @@ function add_cadastro(){
 }
 
 // Adiciona login
-function add_login(){
+function add_login($evento_id, $campos_login){
     require '../connect/connect.php';
+    $sql="UPDATE `configuracoes` SET campos_login = '$campos_login' WHERE lives_idlives = '$evento_id'";
+    if (mysqli_query($link, $sql)) {
+        return mysqli_insert_id($link);
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona mensagens

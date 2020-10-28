@@ -153,6 +153,33 @@ if($etapa == 3){
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
     $_SESSION['etapa'] = 4;
 }
+if($etapa == 4){
+    $_SESSION['etapa'] = 5;
+}
+if($etapa == 5){
+    $evento_id = $_SESSION['evento_id'];
+
+    if(!isset($_GET['f'])){
+        $f = "";
+    } else{
+        $f = mysqli_real_escape_string($link, $_GET['f']);
+    }
+
+    isset($_POST['login_campo_nome']) ? $login_campo_nome = 'nome' : '';
+    isset($_POST['login_campo_sobrenome']) ? $login_campo_sobrenome = 'sobrenome' : '';
+    isset($_POST['login_campo_email']) ? $login_campo_email = 'email' : '';
+    isset($_POST['login_campo_telefone']) ? $login_campo_telefone = 'telefone' : '';
+    isset($_POST['login_campo_celular']) ? $login_campo_celular = 'celular' : '';
+    isset($_POST['login_campo_empresa']) ? $login_campo_empresa = 'empresa' : '';
+    isset($_POST['login_campo_cargo']) ? $login_campo_cargo = 'cargo' : '';
+    isset($_POST['login_campo_especialidade']) ? $login_campo_especialidade = 'especialidade' : '';
+    isset($_POST['login_campo_uf_crm']) ? $login_campo_uf_crm = 'UF_CRM' : '';
+    isset($_POST['campo_senha']) ? $campo_senha = 'senha' : '';
+    $campos_login = "$login_campo_nome, $login_campo_sobrenome, $login_campo_email, $login_campo_telefone, $login_campo_celular, $login_campo_empresa, $login_campo_cargo, $login_campo_especialidade, $login_campo_uf_crm, $campo_senha";
+    $add_login = add_login($evento_id, $campos_login);
+
+    $_SESSION['etapa'] = 6;
+}
 header('Location: ../install/');
 
 ?>
