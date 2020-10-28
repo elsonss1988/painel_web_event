@@ -9,6 +9,7 @@ foreach ($_POST as $key => $value){
 }
 
 $etapa = $_SESSION['etapa'];
+$retornar = $_SESSION['retorna'];	
 
 // Adiciona cliente e dados básicos do evento
 if($etapa == 1){
@@ -127,6 +128,47 @@ if($etapa == 2){
         }
     }
 }
+
+if($etapa == 3){
+    $_SESSION['etapa'] = 4;
+}
+
+if($etapa == 4){
+    $cadastro= new stdClass;
+
+    $cadastro->nome=isset($_POST['nome'])?$_POST['nome']:'1';
+    $cadastro->sobrenome= isset($_POST['sobrenome'])?$_POST['sobrenome']:'2';
+    $cadastro->email= isset($_POST['email'])?$_POST['email']:'3';
+    $cadastro->telefone= isset($_POST['telefone'])?$_POST['telefone']:'4';
+    $cadastro->celular= isset($_POST['celular'])?$_POST['celular']:'5';
+    $cadastro->empresa=  isset($_POST['empresa'])?$_POST['empresa']:'6';
+    $cadastro->cargo= isset($_POST['cargo'])?$_POST['cargo']:'7';
+    $cadastro->especialidade= isset($_POST['especialidade'])?$_POST['especialidade']:'8';
+    $cadastro->ufcrm= isset($_POST['ufcrm'])?$_POST['ufcrm']:'9';
+    $cadastro->senha= isset($_POST['senha'])?$_POST['senha']:'*';
+    $cadastroJson=json_encode($cadastro);
+    
+    $file = fopen("cache.txt", "a+") or die("Unable to open file!");
+    fwrite($file,json_encode($cadastro));
+    $sql="INSERT INTO configuracoes (id,lives_idlives,player1,campos_cadastro) VALUES (12,10,'MegaPlay','$cadastroJson')";
+    mysqli_query($link, $sql);
+    
+    add_cadastro();
+    $_SESSION['etapa'] = 5;
+}
+if($etapa == 5){
+    $_SESSION['etapa'] = 6;
+}
+if($etapa == 6){
+    $_SESSION['etapa'] = 7;
+};
+
+   if(retorna==1){   
+      $_SESSION['etapa']=$etapa-2;
+      header('Location: ../install/');
+      $_SESSION['retorna']=0;
+    }
+
 header('Location: ../install/');
 
 ?>

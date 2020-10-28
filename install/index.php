@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$_SESSION['etapa'] =4;
+$_SESSION['etapa']=4;
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -301,61 +301,61 @@ $_SESSION['etapa'] =4;
 								<b>Selecione os campos para cadastro</b>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_nome" checked>
+										<input class="form-check-input" type="checkbox" name="campo_nome" id="cadastro_campo_nome" checked>
 										<label class="form-check-label" for="cadastro_campo_nome">Nome</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_sobrenome" checked>
+										<input class="form-check-input" type="checkbox" name="campo_sobrenome" id="cadastro_campo_sobrenome" checked>
 										<label class="form-check-label" for="cadastro_campo_sobrenome">Sobrenome</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_email" onchange="exibe('cadastro_campo_email', 'campo_valida_email')" checked>
+										<input class="form-check-input" type="checkbox" name="campo_email" id="cadastro_campo_email" onchange="exibe('cadastro_campo_email', 'campo_valida_email')" checked>
 										<label class="form-check-label" for="cadastro_campo_email">Email</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_telefone">
+										<input class="form-check-input" type="checkbox" name="campo_telefone" id="cadastro_campo_telefone">
 										<label class="form-check-label" for="cadastro_campo_telefone">Telefone</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_celular">
+										<input class="form-check-input" type="checkbox" name="campo_celular"  id="cadastro_campo_celular">
 										<label class="form-check-label" for="cadastro_campo_celular">Celular</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_empresa">
+										<input class="form-check-input" type="checkbox" name="campo_empresa" id="cadastro_campo_empresa">
 										<label class="form-check-label" for="cadastro_campo_empresa">Empresa</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_cargo">
+										<input class="form-check-input" type="checkbox" name="campo_cargo" id="cadastro_campo_cargo">
 										<label class="form-check-label" for="cadastro_campo_cargo">Cargo</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_especialidade" checked>
+										<input class="form-check-input" type="checkbox" name="campo_especialidade" id="cadastro_campo_especialidade" checked>
 										<label class="form-check-label" for="cadastro_campo_especialidade">Especialidade</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="cadastro_campo_uf_crm" onchange="exibe('cadastro_campo_uf_crm', 'campo_valida_crm')"  checked>
+										<input class="form-check-input" type="checkbox"  name="campo_ufcrm" id="cadastro_campo_ufcrm" onchange="exibe('cadastro_campo_uf_crm', 'campo_valida_crm')"  checked>
 										<label class="form-check-label" for="cadastro_campo_uf_crm">UF e CRM</label>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="tipo_de_senha" onchange="checkbox_fields('senha');">
+										<input class="form-check-input" type="checkbox" name="campo_senha"  id="tipo_de_senha" onchange="checkbox_fields('senha');">
 										<label class="form-check-label" for="cadastro_campo_senha" >Senha</label>
 									</div>
 								</div>
@@ -364,13 +364,13 @@ $_SESSION['etapa'] =4;
 									<b>Senha</b>
 									<div class="col-md-3 pt-1">
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" id="senha_aleatoria" onchange="nocheck('senha_aleatoria', 'tipo_de_senha_padrao', '1')";>
+											<input class="form-check-input" type="checkbox"  name="senha_aleatoria" id="senha_aleatoria" onchange="nocheck('senha_aleatoria', 'tipo_de_senha_padrao', '1')";>
 											<label class="form-check-label" for="senha_aleatoria">Senha Aleatória</label>
 										</div>
 									</div>
 									<div class="col-md-auto pt-1">
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" id="tipo_de_senha_padrao" onchange="checkbox_fields('senha_padrao'); nocheck('tipo_de_senha_padrao', 'senha_aleatoria', '1');" checked>
+											<input class="form-check-input" type="checkbox" name="senha_padrao" id="tipo_de_senha_padrao" onchange="checkbox_fields('senha_padrao'); nocheck('tipo_de_senha_padrao', 'senha_aleatoria', '1');" checked>
 											<label class="form-check-label" for="senha_padrao" >Senha Padrão</label>
 										</div>
 									</div>
@@ -489,19 +489,18 @@ $_SESSION['etapa'] =4;
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
-								
-						<!-- Reigão de Manipulação do retornar-->
+						<!-- Região de Manipulação do retornar-->
+						<!-- <?php 
+							if($_SESSION['etapa'] > 1){
+						$_SESSION['retorna']=1;									
+						echo '<button class="btn btn-primary"  onclick="console.log(window)">'.'Retornar'.'</button>';
+						};
+						?>						 -->
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 					</div>
 				</form>
 
-				<!-- Região de Manipulação do retornar-->
-				<!-- <?php 
-					if($_SESSION['etapa'] > 1){
-						#--$_SESSION['etapa'];									
-						echo '<button class="btn btn-primary"  onclick="console.log(window)">'.'Retornar'.'</button>';
-					};
-				?> -->
+				
 				
 				<!-- Add Usuário -->
 				<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
