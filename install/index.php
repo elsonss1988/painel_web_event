@@ -1,6 +1,11 @@
 <?php 
 session_start();
 $_SESSION['etapa']=4;
+//$invalid=$_SESSION['invalid'];
+// if($invalid==1){
+// 	//echo "<script>confirm('Hello')</script>";
+// 	$_SESSION['invalid']=0;
+// }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -349,7 +354,7 @@ $_SESSION['etapa']=4;
 								</div>
 								<div class="col-md-2">
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox"  name="campo_ufcrm" id="cadastro_campo_ufcrm" onchange="exibe('cadastro_campo_uf_crm', 'campo_valida_crm')"  checked>
+										<input class="form-check-input" type="checkbox"  name="campo_ufcrm" id="cadastro_campo_uf_crm" onchange="exibe('cadastro_campo_uf_crm', 'campo_valida_crm')"  checked>
 										<label class="form-check-label" for="cadastro_campo_uf_crm">UF e CRM</label>
 									</div>
 								</div>
@@ -399,6 +404,27 @@ $_SESSION['etapa']=4;
 							</div>
 							
 						</div>
+						<script>
+				        	let result = document.querySelector('#result');
+        					document.body.addEventListener('change', function (e) {
+            				let target = e.target;
+            				let message;
+            				switch (target.id) {
+                			case 'cadastro_campo_nome':
+                    			message = 'The Pending radio button changed';
+                    			break;
+                			case 'cadastro_campo_sobrenome':
+                    			message = 'The Resolved radio button changed';
+                    			break;
+                			case 'cadastro_campo_celular':
+                    			message = 'The Rejected radio button changed';
+								break;
+							default
+								message = 'Continue';
+           					 }
+            				result.textContent = message;
+        					});
+    					</script>
 						
 						<?php 
 					} if($_SESSION['etapa'] == 5){?>
@@ -497,6 +523,7 @@ $_SESSION['etapa']=4;
 						};
 						?>						 -->
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
+						<p id="result"></p>
 					</div>
 				</form>
 
