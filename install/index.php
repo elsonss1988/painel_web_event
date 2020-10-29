@@ -4,7 +4,7 @@ session_start();
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<!-- Required meta tags -->
+	<!-- Required meta tags  -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" sizes="212x212" href="../assets/img/icon.png">
@@ -248,18 +248,18 @@ session_start();
 						<div id="campo_interacao" class="row g-3">
 							<h2 class="display-2">Interação</h2>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" onchange="nocheck('interacao_perguntas', 'tipo_de_interacao', 'interacao');" id="interacao_perguntas">
+								<input class="form-check-input" type="checkbox" name="interacao_perguntas" onchange="nocheck('interacao_perguntas', 'tipo_de_interacao', 'interacao');" id="interacao_perguntas">
 								<label class="form-check-label" for="interacao_perguntas" >Perguntas</label>
 							</div>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
 								<label class="form-check-label" for="tipo_de_interacao">Slido, Vevox, Vimeo, outros...</label>
-								<input class="form-check-input" type="checkbox" id="tipo_de_interacao" checked onchange="checkbox_fields('interacao'); nocheck('tipo_de_interacao', 'interacao_perguntas');">
+								<input class="form-check-input" type="checkbox" name="tipo_de_interacao" id="tipo_de_interacao" checked onchange="checkbox_fields('interacao'); nocheck('tipo_de_interacao', 'interacao_perguntas');">
 							</div>
 							<div class="row g-3" id="campos_mostrar_interacao">
 								<div class="col-md-12">
 									<label for="interacao_codigo" class="form-label">Código</label>
-									<textarea type="text" class="form-control" id="interacao_codigo" rows="5" required></textarea>
+									<textarea type="text" class="form-control" name="interacao_codigo" id="interacao_codigo" rows="5" required></textarea>
 								</div>
 							</div>
 							<div id="campos_oculto_interacao">
@@ -271,15 +271,15 @@ session_start();
 							<h2 class="display-2 mt-5 pt-5">Transmissão</h2>
 							<div class="col-md-12 pt-3">
 								<label for="transmissao_player1" class="form-label">Código do Player Principal</label>
-								<textarea type="text" class="form-control" id="transmissao_player1" rows="2" required></textarea>
+								<textarea type="text" class="form-control" name="transmissao_player1" id="transmissao_player1" rows="2" required></textarea>
 							</div>
 							<div class="col-md-12 pt-3">
 								<label for="transmissao_player2" class="form-label">Código do Player Secundário</label>
-								<textarea type="text" class="form-control" id="transmissao_player2" rows="2"></textarea>
+								<textarea type="text" class="form-control" name="transmissao_player2" id="transmissao_player2" rows="2"></textarea>
 							</div>
 							<div class="col-md-12 pt-3">
 								<label for="transmissao_traducao" class="form-label">Código do Player de Tradução (quando houver)</label>
-								<textarea type="text" class="form-control" id="transmissao_traducao" rows="2"></textarea>
+								<textarea type="text" class="form-control" name="transmissao_traducao" id="transmissao_traducao" rows="2"></textarea>
 							</div>
 						</div>
 						
@@ -405,61 +405,61 @@ session_start();
 							<h2 class="display-2">Login</h2>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_nome">
+									<input class="form-check-input" type="checkbox" name="login_campo_nome" id="login_campo_nome">
 									<label class="form-check-label" for="login_campo_nome">Nome</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_sobrenome">
+									<input class="form-check-input" type="checkbox" name="login_campo_sobrenome" id="login_campo_sobrenome">
 									<label class="form-check-label" for="login_campo_sobrenome">Sobrenome</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_email" checked>
+									<input class="form-check-input" type="checkbox" name="login_campo_email" id="login_campo_email" checked>
 									<label class="form-check-label" for="login_campo_email">Email</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_telefone">
+									<input class="form-check-input" type="checkbox" name="login_campo_telefone" id="login_campo_telefone">
 									<label class="form-check-label" for="login_campo_telefone">Telefone</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_celular">
+									<input class="form-check-input" type="checkbox" name="login_campo_celular" id="login_campo_celular">
 									<label class="form-check-label" for="login_campo_celular">Celular</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_empresa">
+									<input class="form-check-input" type="checkbox" name="login_campo_empresa" id="login_campo_empresa">
 									<label class="form-check-label" for="login_campo_empresa">Empresa</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_cargo">
+									<input class="form-check-input" type="checkbox" name="login_campo_cargo" id="login_campo_cargo">
 									<label class="form-check-label" for="login_campo_cargo">Cargo</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_especialidade">
+									<input class="form-check-input" type="checkbox" name="login_campo_especialidade" id="login_campo_especialidade">
 									<label class="form-check-label" for="login_campo_especialidade">Especialidade</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_uf_crm" checked>
+									<input class="form-check-input" type="checkbox" name="login_campo_uf_crm" id="login_campo_uf_crm" checked>
 									<label class="form-check-label" for="login_campo_uf_crm">UF e CRM</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+									<input class="form-check-input" type="checkbox" name="campo_senha" id="flexSwitchCheckDefault" checked>
 									<label class="form-check-label" for="flexSwitchCheckDefault">Senha</label>
 								</div>
 							</div>

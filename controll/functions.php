@@ -142,14 +142,39 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
-// Adiciona dados de interação
-function add_interacao(){
+// Adiciona uma linha na tabela configuracao
+function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
+    $sql="INSERT INTO `configuracoes` (`lives_idlives`, `perguntas`, `frame_chat`, `player1`, `player2`, `player_traducao`, `campos_cadastro`, `valida_crm`, `valida_email`, `tipo_senha`, `senha_padrao`, `campos_login`, `mensagem_cadastro`, `mensagem_reset_mail`) VALUES ('$evento_id', 'perguntas','frame_chat','player1','player2','player_traducao','campos_cadastro',0,0,0,'senha_padrao','campos_login','mensagem_cadastro','mensagem_reset_mail')";
+    if (mysqli_query($link, $sql)) {
+        return mysqli_insert_id($link);
+    } 
+    else {
+        return 0;
+    }
+}
+// Adiciona dados de interação
+function add_interacao($evento_id, $interacao_perguntas, $interacao_codigo){
+    require '../connect/connect.php';
+    $sql="UPDATE `configuracoes` SET perguntas = '$interacao_perguntas', frame_chat = '$interacao_codigo' WHERE lives_idlives = '$evento_id'";
+    if (mysqli_query($link, $sql)) {
+        return mysqli_insert_id($link);
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona transmissão
-function add_transmissao(){
+function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao){
     require '../connect/connect.php';
+    $sql="UPDATE `configuracoes` SET player1 = '$transmissao_player1', player2 = '$transmissao_player2', player_traducao = '$transmissao_traducao' WHERE lives_idlives = '$evento_id'";
+    if (mysqli_query($link, $sql)) {
+        return mysqli_insert_id($link);
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona cadastro
@@ -158,8 +183,15 @@ function add_cadastro(){
 }
 
 // Adiciona login
-function add_login(){
+function add_login($evento_id, $campos_login){
     require '../connect/connect.php';
+    $sql="UPDATE `configuracoes` SET campos_login = '$campos_login' WHERE lives_idlives = '$evento_id'";
+    if (mysqli_query($link, $sql)) {
+        return mysqli_insert_id($link);
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona mensagens
