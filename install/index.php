@@ -2,10 +2,16 @@
 <?php 
 session_start();
 #$_SESSION['etapa']=4;
+<<<<<<< HEAD
 
 if($_SESSION['invalid']==1){
 	echo"<script>
 	confirm('Selecione um Item!')
+=======
+if($_SESSION['invalid']==1){
+	echo"<script>
+	confirm('Selecione um Item')
+>>>>>>> 9f5859518537b1737648c978ba0cc7b1aa513348
 	</script>";
 	$_SESSION['invalid']=0;
 }        
