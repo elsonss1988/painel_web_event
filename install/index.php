@@ -1,12 +1,16 @@
+
 <?php 
 session_start();
-$_SESSION['etapa']=4;
-//$invalid=$_SESSION['invalid'];
-// if($invalid==1){
-// 	//echo "<script>confirm('Hello')</script>";
-// 	$_SESSION['invalid']=0;
-// }
+#$_SESSION['etapa']=4;
+if($_SESSION['invalid']==1){
+	echo"<script>
+	confirm('Selecione um Item')
+	result=document.querySelectorAll('#result')
+	</script>";
+	$_SESSION['invalid']=0;
+}        
 ?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -404,28 +408,7 @@ $_SESSION['etapa']=4;
 							</div>
 							
 						</div>
-						<script>
-				        	let result = document.querySelector('#result');
-        					document.body.addEventListener('change', function (e) {
-            				let target = e.target;
-            				let message;
-            				switch (target.id) {
-                			case 'cadastro_campo_nome':
-                    			message = 'The Pending radio button changed';
-                    			break;
-                			case 'cadastro_campo_sobrenome':
-                    			message = 'The Resolved radio button changed';
-                    			break;
-                			case 'cadastro_campo_celular':
-                    			message = 'The Rejected radio button changed';
-								break;
-							default
-								message = 'Continue';
-           					 }
-            				result.textContent = message;
-        					});
-    					</script>
-						
+											
 						<?php 
 					} if($_SESSION['etapa'] == 5){?>
 						<!-- Login -->
@@ -716,7 +699,7 @@ $_SESSION['etapa']=4;
 			}
 		}
 
-		// esse igual a ação de OOP this
+		// ***esse*** igual a ação de OOP this
 		function exibe(esse, id_campo){
 			var esse = document.getElementById(esse);
 			var id_campo = document.getElementById(id_campo);

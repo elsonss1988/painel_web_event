@@ -145,13 +145,13 @@ if($etapa == 4){
     $cadastro->empresa=  isset($_POST['campo_empresa'])?1:null;
     $cadastro->cargo= isset($_POST['campo_cargo'])?1:null;
     $cadastro->especialidade= isset($_POST['campo_especialidade'])?1:null;
-    $cadastro->ufcrm= isset($_POST['campo_ufcrm"'])?1:null;
+    $cadastro->ufcrm= isset($_POST['campo_ufcrm'])?1:null;
     $cadastro->senha= isset($_POST['campo_senha'])?1:null;
-    $cadastro->senha_padrao= isset($_POST['senha_padrao'])?1:null;
-    $cadastro->senha_aleatoria= isset($_POST['senha_aleatoria'])?1:null;
-    $cadastro->senha_campo= isset($_POST['senha_campo'])?$_POST['senha_campo']:null;
-    $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null;
-    $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
+   // $cadastro->senha_padrao= isset($_POST['senha_padrao'])?1:null;
+   // $cadastro->senha_aleatoria= isset($_POST['senha_aleatoria'])?1:null;
+   // $cadastro->senha_campo= isset($_POST['senha_campo'])?$_POST['senha_campo']:null;
+   // $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null;
+   // $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
     
     if (!($cadastro->nome || $cadastro->sobrenome || $cadastro->email || $cadastro->telefone || $cadastro->celular || $cadastro->empresa || $cadastro->cargo || $cadastro->especialidade || $cadastro->ufcrm || $cadastro->senha)){
         $cadastro->flag=1;
@@ -162,19 +162,30 @@ if($etapa == 4){
     }else{
         $cadastro->flag=0;
     }
-    $cadastroJson=json_encode($cadastro);
-
-
-    // if(is_null($cadastro)){
+    
+    //if((is_null(json_decode($cadastro, true)))){
+    //$array_c=json_decode($cadastro, true);
+    //if(is_null($array_c)){
+    //if(is_null($cadastro)){
+    // while($){
         
-    //     $cadastro->flag=1;
-    //     echo "<script>confirm('Hello')</script>";
+    //     $cadastro->flag=array_values($array_c);
+    //     echo "<script>
+        
+    //     if (confirm('Selecione um Item')){
+    //         location.reload();
+    //     }        
+    //     </script>";
+        
     //     $_SESSION['etapa'] = 5;
+    //     //var_dump();
+    //     //var_dump(json_decode($cadastro, true));
     // }else{
     //     $cadastro->flag=0;
     // }
     // $file = fopen("cache.txt", "a+") or die("Unable to open file!");
     // fwrite($file,json_encode($cadastro));
+    $cadastroJson=json_encode($cadastro);
     $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
     mysqli_query($link, $sql);
     
