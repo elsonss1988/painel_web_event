@@ -5,7 +5,6 @@ session_start();
 if($_SESSION['invalid']==1){
 	echo"<script>
 	confirm('Selecione um Item')
-	result=document.querySelectorAll('#result')
 	</script>";
 	$_SESSION['invalid']=0;
 }        

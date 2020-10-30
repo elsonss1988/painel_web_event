@@ -153,16 +153,22 @@ if($etapa == 4){
    // $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null;
    // $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
     
-    if (!($cadastro->nome || $cadastro->sobrenome || $cadastro->email || $cadastro->telefone || $cadastro->celular || $cadastro->empresa || $cadastro->cargo || $cadastro->especialidade || $cadastro->ufcrm || $cadastro->senha)){
-        $cadastro->flag=1;
-        $_SESSION['invalid']=1;
-        echo "Hello";
-        echo "<script>confirm('Hello')</script>";
-        echo "<script>alert('Mensagem');</script>";   
-    }else{
-        $cadastro->flag=0;
-    }
+    // if (!($cadastro->nome || $cadastro->sobrenome || $cadastro->email || $cadastro->telefone || $cadastro->celular || $cadastro->empresa || $cadastro->cargo || $cadastro->especialidade || $cadastro->ufcrm || $cadastro->senha)){
+    //     $cadastro->flag=1;
+    //     $_SESSION['invalid']=1;
+    // }else{
+    //     $cadastro->flag=0;
+    // }
     
+    foreach($cadastro as $propName => $propValue ){    
+        if (($propValue)){
+            $cadastro->flag=1;
+            break;            
+        }else{
+            $_SESSION['invalid']=1;
+            $cadastro->flag=0;
+        }
+    }
     //if((is_null(json_decode($cadastro, true)))){
     //$array_c=json_decode($cadastro, true);
     //if(is_null($array_c)){
@@ -183,8 +189,8 @@ if($etapa == 4){
     // }else{
     //     $cadastro->flag=0;
     // }
-    // $file = fopen("cache.txt", "a+") or die("Unable to open file!");
-    // fwrite($file,json_encode($cadastro));
+     $file = fopen("cache.txt", "a+") or die("Unable to open file!");
+     fwrite($file,json_encode($cadastro));
     $cadastroJson=json_encode($cadastro);
     $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
     mysqli_query($link, $sql);
