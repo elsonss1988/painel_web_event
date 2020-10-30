@@ -177,8 +177,12 @@ if($etapa == 5){
     isset($_POST['campo_senha']) ? $campo_senha = 'senha' : '';
     $campos_login = "$login_campo_nome, $login_campo_sobrenome, $login_campo_email, $login_campo_telefone, $login_campo_celular, $login_campo_empresa, $login_campo_cargo, $login_campo_especialidade, $login_campo_uf_crm, $campo_senha";
     $add_login = add_login($evento_id, $campos_login);
-
-    $_SESSION['etapa'] = 6;
+    if(isset($_POST['login_campo_nome']) || isset($_POST['login_campo_sobrenome']) || isset($_POST['login_campo_email']) || isset($_POST['login_campo_telefone']) || isset($_POST['login_campo_celular']) || isset($_POST['login_campo_empresa']) || isset($_POST['login_campo_cargo']) || isset($_POST['login_campo_especialidade']) || isset($_POST['login_campo_uf_crm']) || isset($_POST['campo_senha'])){
+        $_SESSION['etapa'] = 6;
+    }else{
+        echo "Favor selecionar um item";
+    }
+    
 }
 header('Location: ../install/');
 
