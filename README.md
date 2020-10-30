@@ -3,8 +3,14 @@
 ![_webevent]("../../assets/img/logo.png)
 ## Observações
 
-Check as configurações setadas em BD com o seu BD
+* Checar as configurações setadas em BD com o seu BD (add ao git ignore)
+ 
+* **campos_cadastro** alterado para JSON na tabela de configuracoes
 
+
+~~~MySQL
+alter table configuracoes MODIFY campos_cadastro json
+~~~
 
 ## Pendencias
 

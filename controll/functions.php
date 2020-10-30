@@ -142,6 +142,7 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
+
 // Adiciona uma linha na tabela configuracao
 function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
@@ -180,6 +181,13 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 // Adiciona cadastro
 function add_cadastro(){
     require '../connect/connect.php';
+    $sql="insert into inscricoes (lives_idlives,sobrenome,`termo_uso`) values (10,'Silva',1)";
+    if (mysqli_query($link, $sql)) {
+        return 1;
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona login

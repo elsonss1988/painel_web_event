@@ -3,9 +3,6 @@
 session_start();
 #$_SESSION['etapa']=4;
 
-
-
-
 if($_SESSION['invalid']==1){
 	echo"<script>
 	confirm('Selecione um Item!')
