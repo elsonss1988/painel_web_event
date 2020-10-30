@@ -408,32 +408,7 @@ if($_SESSION['invalid']==1){
 							</div>
 							
 						</div>
-<<<<<<< HEAD
 											
-=======
-						<script>
-				        	let result = document.querySelector('#result');
-        					document.body.addEventListener('change', function (e) {
-            				let target = e.target;
-            				let message;
-            				switch (target.id) {
-                			case 'cadastro_campo_nome':
-                    			message = 'The Pending radio button changed';
-                    			break;
-                			case 'cadastro_campo_sobrenome':
-                    			message = 'The Resolved radio button changed';
-                    			break;
-                			case 'cadastro_campo_celular':
-                    			message = 'The Rejected radio button changed';
-								break;
-							default
-								message = 'Continue';
-           					 }
-            				result.textContent = message;
-        					});
-    					</script>
-						
->>>>>>> aea1503... estrategia de travamento
 						<?php 
 					} if($_SESSION['etapa'] == 5){?>
 						<!-- Login -->
