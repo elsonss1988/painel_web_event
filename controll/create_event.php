@@ -9,6 +9,7 @@ foreach ($_POST as $key => $value){
 }
 
 $etapa = $_SESSION['etapa'];
+$retornar = $_SESSION['retorna'];	
 
 // Adiciona cliente e dados básicos do evento
 if($etapa == 1){
@@ -136,7 +137,7 @@ if($etapa == 3){
         $f = "";
     } else{
         $f = mysqli_real_escape_string($link, $_GET['f']);
-    }
+}
 
     if(isset($_POST['interacao_perguntas'])){
         $interacao_perguntas = 1;
@@ -144,7 +145,7 @@ if($etapa == 3){
     else{
         $interacao_perguntas = 0;
     }
-    
+
     $interacao_codigo = mysqli_real_escape_string($link, $_POST['interacao_codigo']);
     $transmissao_player1 = mysqli_real_escape_string($link, $_POST['transmissao_player1']);
     $transmissao_player2 = mysqli_real_escape_string($link, $_POST['transmissao_player2']);
@@ -154,7 +155,46 @@ if($etapa == 3){
     $_SESSION['etapa'] = 4;
 }
 if($etapa == 4){
-    $_SESSION['etapa'] = 5;
+    
+        $cadastro= new stdClass;    
+        $cadastro->nome=isset($_POST['campo_nome'])?1:null;
+        $cadastro->sobrenome= isset($_POST['campo_sobrenome'])?1:null;
+        $cadastro->email= isset($_POST['campo_email'])?1:null;
+        $cadastro->telefone= isset($_POST['campo_telefone'])?1:null;
+        $cadastro->celular= isset($_POST['campo_celular'])?1:null;
+        $cadastro->empresa=  isset($_POST['campo_empresa'])?1:null;
+        $cadastro->cargo= isset($_POST['campo_cargo'])?1:null;
+        $cadastro->especialidade= isset($_POST['campo_especialidade'])?1:null;
+        $cadastro->ufcrm= isset($_POST['campo_ufcrm'])?1:null;
+        $cadastro->senha= isset($_POST['campo_senha'])?1:null;
+        
+        if($cadastro->senha){
+            $cadastro->senha_padrao= isset($_POST['senha_padrao'])?1:null;
+            $cadastro->senha_aleatoria= isset($_POST['senha_aleatoria'])?1:null;
+            $cadastro->senha_campo= isset($_POST['senha_campo'])?$_POST['senha_campo']:null;
+        }
+
+        if($cadastro->senha){
+            $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null;
+            $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
+        }
+                      
+        foreach($cadastro as $propName => $propValue ){    
+            if (($propValue)){
+                $cadastro->flag=1;
+                $_SESSION['etapa'] =5;
+                $cadastroJson=json_encode($cadastro);
+                $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
+                mysqli_query($link, $sql);
+                break;   
+            }else{
+                $_SESSION['invalid']=1;
+                $cadastro->flag=0;
+                $_SESSION['etapa'] =4;
+            }
+        }
+        
+        add_cadastro(); 
 }
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];
@@ -164,7 +204,6 @@ if($etapa == 5){
     } else{
         $f = mysqli_real_escape_string($link, $_GET['f']);
     }
-
     isset($_POST['login_campo_nome']) ? $login_campo_nome = 'nome' : '';
     isset($_POST['login_campo_sobrenome']) ? $login_campo_sobrenome = 'sobrenome' : '';
     isset($_POST['login_campo_email']) ? $login_campo_email = 'email' : '';
@@ -181,9 +220,13 @@ if($etapa == 5){
         $_SESSION['etapa'] = 6;
     }else{
         echo "Favor selecionar um item";
-    }
-    
+    }    
 }
+
+if($etapa == 6){
+    $_SESSION['etapa'] = 7;
+};
+
 header('Location: ../install/');
 
 ?>
