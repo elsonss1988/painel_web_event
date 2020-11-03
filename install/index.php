@@ -1,18 +1,12 @@
 
 <?php 
 session_start();
-#$_SESSION['etapa']=4;
-<<<<<<< HEAD
+if($_SESSION['etapa']==1){
+	$_SESSION['invalid']=0;
+}
 
 if($_SESSION['invalid']==1){
-	echo"<script>
-	confirm('Selecione um Item!')
-=======
-if($_SESSION['invalid']==1){
-	echo"<script>
-	confirm('Selecione um Item')
->>>>>>> 9f5859518537b1737648c978ba0cc7b1aa513348
-	</script>";
+			//code
 	$_SESSION['invalid']=0;
 }        
 ?>
@@ -422,62 +416,75 @@ if($_SESSION['invalid']==1){
 							<h2 class="display-2">Login</h2>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_nome">
+									<input class="form-check-input" type="checkbox" name="login_campo_nome" id="login_campo_nome">
 									<label class="form-check-label" for="login_campo_nome">Nome</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_sobrenome">
+									<input class="form-check-input" type="checkbox" name="login_campo_sobrenome" id="login_campo_sobrenome">
 									<label class="form-check-label" for="login_campo_sobrenome">Sobrenome</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_email" checked>
+									<input class="form-check-input" type="checkbox" name="login_campo_email" id="login_campo_email" checked>
 									<label class="form-check-label" for="login_campo_email">Email</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_telefone">
+									<input class="form-check-input" type="checkbox" name="login_campo_telefone" id="login_campo_telefone">
 									<label class="form-check-label" for="login_campo_telefone">Telefone</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_celular">
+									<input class="form-check-input" type="checkbox" name="login_campo_celular" id="login_campo_celular">
 									<label class="form-check-label" for="login_campo_celular">Celular</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_empresa">
+									<input class="form-check-input" type="checkbox" name="login_campo_empresa" id="login_campo_empresa">
 									<label class="form-check-label" for="login_campo_empresa">Empresa</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_cargo">
+									<input class="form-check-input" type="checkbox" name="login_campo_cargo" id="login_campo_cargo">
 									<label class="form-check-label" for="login_campo_cargo">Cargo</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_especialidade">
+									<input class="form-check-input" type="checkbox" name="login_campo_especialidade" id="login_campo_especialidade">
 									<label class="form-check-label" for="login_campo_especialidade">Especialidade</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="login_campo_uf_crm" checked>
+									<input class="form-check-input" type="checkbox" name="login_campo_uf_crm" id="login_campo_uf_crm" checked>
 									<label class="form-check-label" for="login_campo_uf_crm">UF e CRM</label>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+									<input class="form-check-input" type="checkbox" name="campo_senha" id="flexSwitchCheckDefault" checked>
 									<label class="form-check-label" for="flexSwitchCheckDefault">Senha</label>
+								</div>
+							</div>
+							<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+								<div class="toast-header">
+									<img src="..." class="rounded mr-2" alt="...">
+									<strong class="mr-auto">Bootstrap</strong>
+									<small>11 mins ago</small>
+									<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="toast-body">
+									Hello, world! This is a toast message.
 								</div>
 							</div>
 						</div>
@@ -490,11 +497,11 @@ if($_SESSION['invalid']==1){
 							<h2 class="display-2">Mensagens</h2>
 							<div class="col-md-12 pt-3">
 								<label for="texto_email_cadastro" class="form-label">Texto do e-mail de cadastro</label>
-								<textarea type="text" class="form-control" id="texto_email_cadastro" rows="5" required></textarea>
+								<textarea type="text" class="form-control" id="texto_email_cadastro" name="texto_email_cadastro" rows="5" required></textarea>
 							</div>
 							<div class="col-md-12 pt-3">
 								<label for="texto_email_nova_senha" class="form-label">Texto do e-mail de nova senha</label>
-								<textarea type="text" class="form-control" id="texto_email_nova_senha" rows="5" required></textarea>
+								<textarea type="text" class="form-control" id="texto_email_nova_senha" name="texto_email_nova_senha" rows="5" required></textarea>
 							</div>
 						</div>
 						

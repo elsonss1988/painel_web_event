@@ -11,14 +11,20 @@
 ~~~MySQL
 alter table configuracoes MODIFY campos_cadastro json
 ~~~
+~~~PHP
+$link->set_charset("utf8");
+~~~
+
 
 ## Pendencias
 
-- [ ] Adiciona dados de interação
-- [ ] Adiciona transmissão
-- [ ] Adiciona cadastro
-- [ ] Adiciona login
-- [ ] Adiciona mensagens
+- [X] Adiciona dados de interação
+- [X] Adiciona transmissão
+- [X] Adiciona cadastro
+- [X] Adiciona login
+- [x] Adiciona mensagens
+- [ ] Travamento
+- [ ] Gravação completa
 - [ ] Dashboard
 - [ ] Separa imagens carregadas das imagens do projeto
 
