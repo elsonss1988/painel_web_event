@@ -1,6 +1,9 @@
 
 <?php 
 session_start();
+if($_SESSION['etapa']==1){
+	$_SESSION['invalid']=0;
+}
 
 if($_SESSION['invalid']==1){
 	echo"<script>
