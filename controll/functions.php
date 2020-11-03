@@ -142,6 +142,7 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
+
 // Adiciona uma linha na tabela configuracao
 function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
@@ -178,8 +179,16 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 }
 
 // Adiciona cadastro
-function add_cadastro(){
+function add_cadastro($cadastroJson){
     require '../connect/connect.php';
+    $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
+    #mysqli_query($link, $sql);
+    if (mysqli_query($link, $sql)) {
+        return 1;
+    } 
+    else {
+        return 0;
+    }
 }
 
 // Adiciona login
@@ -199,4 +208,5 @@ function add_mensagens(){
     require '../connect/connect.php';
 }
 
-?>
+
+
