@@ -20,7 +20,9 @@ if($_SESSION['invalid']==1){
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="../assets/css/application.css">
-	
+	<!-- toastify.js and css-->
+	<script src="../assets/js/toastify.js"></script>
+	<link rel="stylesheet" href="../assets/css/toastify.css">
 	<title>_webEvent - Instalador</title>
 </head>
 <body class="instalador">
@@ -409,7 +411,7 @@ if($_SESSION['invalid']==1){
 						</div>
 											
 						<?php 
-					} if($_SESSION['etapa'] == 5){?>
+					} if($_SESSION['etapa'] == 5){?>				  
 						<!-- Login -->
 						<div id="campo_login" class="row g-3">
 							<h2 class="display-2">Login</h2>
@@ -473,20 +475,22 @@ if($_SESSION['invalid']==1){
 									<label class="form-check-label" for="flexSwitchCheckDefault">Senha</label>
 								</div>
 							</div>
-							<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
-								<div class="toast-header">
-									<img src="..." class="rounded mr-2" alt="...">
-									<strong class="mr-auto">Bootstrap</strong>
-									<small>11 mins ago</small>
-									<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="toast-body">
-									Hello, world! This is a toast message.
-								</div>
-							</div>
-						</div>
+							<?php 
+								if($_SESSION['etapa']==1){
+									$_SESSION['invalid']=0;
+								}
+
+								if($_SESSION['invalid']==1){
+									echo "<script>var myToast = Toastify({
+										text: 'Selecione pelo menos um item!',
+										duration: 5000
+									   })
+									   myToast.showToast();
+									   </script>";
+									$_SESSION['invalid']=0;
+								} 
+							?>
+						</div>	
 						
 						<?php
 					} if($_SESSION['etapa'] == 6){?>
@@ -755,11 +759,10 @@ if($_SESSION['invalid']==1){
 				}
 				
 			}
-		}
-		
+		}		
 	</script>
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-	<script src="../assets/js/jquery.mask.min.js"></script>
+	<script src="../assets/js/jquery.mask.min.js"></script>	
 </body>
 </html>
