@@ -1,6 +1,7 @@
 <?php 
 session_start();
 ?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -11,7 +12,9 @@ session_start();
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="../assets/css/application.css">
-	
+	<!-- toastify.js and css-->
+	<script src="../assets/js/toastify.js"></script>
+	<link rel="stylesheet" href="../assets/css/toastify.css">
 	<title>_webEvent - Instalador</title>
 </head>
 <body class="instalador">
@@ -27,7 +30,7 @@ session_start();
 		 -->
 		<div class="row">
 			<!-- Sidebar -->
-			<!-- <div class="col-md-3">
+			<div class="col-md-3">
 				<div class="sidebar">
 					<img src="../assets/img/logo_b.png" alt="">
 					<ul class="list-group">
@@ -69,7 +72,7 @@ session_start();
 						</li>
 					</ul>
 				</div>
-			</div> -->
+			</div>
 			
 			<!-- Campos -->
 			<div class="col-md-9 campos">
@@ -399,7 +402,7 @@ session_start();
 						</div>
 						
 						<?php 
-					} if($_SESSION['etapa'] == 5){?>
+					} if($_SESSION['etapa'] == 5){?>				  
 						<!-- Login -->
 						<div id="campo_login" class="row g-3">
 							<h2 class="display-2">Login</h2>
@@ -463,7 +466,22 @@ session_start();
 									<label class="form-check-label" for="flexSwitchCheckDefault">Senha</label>
 								</div>
 							</div>
-						</div>
+							<?php 
+								if($_SESSION['etapa']==1){
+									$_SESSION['invalid']=0;
+								}
+
+								if($_SESSION['invalid']==1){
+									echo "<script>var myToast = Toastify({
+										text: 'Selecione pelo menos um item!',
+										duration: 5000
+									   })
+									   myToast.showToast();
+									   </script>";
+									$_SESSION['invalid']=0;
+								} 
+							?>
+						</div>						
 						
 						<?php
 					} if($_SESSION['etapa'] == 6){?>
@@ -720,11 +738,10 @@ session_start();
 				}
 				
 			}
-		}
-		
+		}		
 	</script>
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-	<script src="../assets/js/jquery.mask.min.js"></script>
+	<script src="../assets/js/jquery.mask.min.js"></script>	
 </body>
 </html>

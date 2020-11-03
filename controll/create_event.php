@@ -180,7 +180,7 @@ if($etapa == 5){
     if(isset($_POST['login_campo_nome']) || isset($_POST['login_campo_sobrenome']) || isset($_POST['login_campo_email']) || isset($_POST['login_campo_telefone']) || isset($_POST['login_campo_celular']) || isset($_POST['login_campo_empresa']) || isset($_POST['login_campo_cargo']) || isset($_POST['login_campo_especialidade']) || isset($_POST['login_campo_uf_crm']) || isset($_POST['campo_senha'])){
         $_SESSION['etapa'] = 6;
     }else{
-        echo "Favor selecionar um item";
+        $_SESSION['invalid']= 1;
     }
     
 }
