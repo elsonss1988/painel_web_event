@@ -36,13 +36,18 @@ if($etapa == 1){
         $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
         $_SESSION['cliente_id'] = $cliente_id;
     } 
-    
+          
     // insere o novo evento e retorna id
     $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
     $_SESSION['evento_id'] = $evento_id;
     
     // muda etapa e redireciona
-    $_SESSION['etapa'] = 2;
+    // if ($_SESSION['evento_id']>0){
+    //     $_SESSION['etapa'] = 2;
+    // }else{
+    //     $_SESSION['etapa'] = 1;
+    //     $_SESSION['invalid'] = 1;
+    // }
 }
 
 // Adiciona convidados e personalização
