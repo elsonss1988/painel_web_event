@@ -9,43 +9,63 @@ foreach ($_POST as $key => $value){
 }
 
 $etapa = $_SESSION['etapa'];
-$retornar = $_SESSION['retorna'];	
 
+//retornar ao inicio
+$retornar = $_POST['retorna'];	
+if($retornar =="1"){
+    $_SESSION['etapa']=0;   
+    header('Location: ../install/');
+}
 // Adiciona cliente e dados básicos do evento
+# Abre Etapa 1
 if($etapa == 1){
-    
-    // verifica se já tem cliente
-    if(!isset($_POST['cliente_id'])){
-        $cliente_id = "";
-    } else{
-        $cliente_id = mysqli_real_escape_string($link, $_POST['cliente_id']);
-    }
+
+    //Destruir valor a selecionar campos escondidos (linha133)
+    if(isset($_POST['tipo_de_cliente'])){
+        echo "Message:".$_SESSION['msg']='Cadastrado';
+        // verifica se já tem cliente
+        if(!isset($_POST['cliente_id'])){
+            //Não foi selecionado um cliente
+            $cliente_id = "";            
+        } else{
+            //Cliente selecionado seta varivel par ao stament
+            $cliente_id = mysqli_real_escape_string($link, $_POST['cliente_id']);
+            #$_SESSION['cliente_id']=$cliente_id;
+        }
+    }else{
+        echo "Message:".$_SESSION['msg']='Não cadastrado';
+        //Caso checkbox desmarcado cadastrar o cliente
+        $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
+        $cliente_site = mysqli_real_escape_string($link, $_POST['cliente_site']);
+        $cliente_responsavel = mysqli_real_escape_string($link, $_POST['cliente_responsavel']);
+        $cliente_logo = $_FILES['cliente_logo'];
+        $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
+        #$_SESSION['cliente_id'] = $cliente_id;
+    }    
     
     // Pega dados gerais
     $evento_nome = mysqli_real_escape_string($link, $_POST['evento_nome']);
     $evento_data = mysqli_real_escape_string($link, $_POST['evento_data']);
     $evento_hora = mysqli_real_escape_string($link, $_POST['evento_hora']);
     
-    // se o cliente não tem cadastro, pega os dados e sobe
-    if($cliente_id == ""){
-        $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
-        $cliente_site = mysqli_real_escape_string($link, $_POST['cliente_site']);
-        $cliente_responsavel = mysqli_real_escape_string($link, $_POST['cliente_responsavel']);
-        $cliente_logo = $_FILES['cliente_logo'];
-        
-        $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
-        $_SESSION['cliente_id'] = $cliente_id;
-    } 
-    
+    $_SESSION['msg'] = strlen($evento_nome)>1;
+    $_SESSION['$cliente_id']=$cliente_id;
     // insere o novo evento e retorna id
-    $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
-    $_SESSION['evento_id'] = $evento_id;
+    if((strlen($evento_nome))>1){
+        $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
+        $_SESSION['evento_id'] = $evento_id;
+    }
     
-    // muda etapa e redireciona
-    $_SESSION['etapa'] = 2;
+    // muda etapa e redireciona conforme q validade dos dados
+    if($evento_id=="" || ((strlen($evento_nome))<1)){
+        $_SESSION['etapa'] = 1;
+    }else{
+        $_SESSION['etapa'] = 2;
+    }
 }
-
+# Fecha Etapa 1
 // Adiciona convidados e personalização
+# Abre Etapa 2
 if($etapa == 2){
     $evento_id = $_SESSION['evento_id'];
     

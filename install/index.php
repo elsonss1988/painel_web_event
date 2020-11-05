@@ -1,13 +1,31 @@
 
 <?php 
 session_start();
+if($_SESSION['etapa']==1){
+	$_SESSION['invalid']=0;
+}
+
+if($_SESSION['etapa']==2){
+	echo "Evento ID".$_SESSION['evento_id'];
+	echo"<br>";
+	echo "Cliente ID".$_SESSION['cliente_id'];
+	echo"<br>";
+	echo "Message:".$_SESSION['msg'];
+}
 
 if($_SESSION['invalid']==1){
 	echo"<script>
 	confirm('Selecione um Item!')
 	</script>";
 	$_SESSION['invalid']=0;
-}        
+}
+
+// $retornar = $_SESSION['retorna'];	
+// if($retornar ==1){
+//     $_SESSION['etapa']=0;   
+//     header('Location: ../install/');
+// }
+
 ?>
 
 <!doctype html>
@@ -93,7 +111,7 @@ if($_SESSION['invalid']==1){
 						<div id="campo_clientes" class="row g-3">
 							<h2 class="display-2">Cliente</h2>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" id="tipo_de_cliente" checked onchange="checkbox_fields('cliente')">
+								<input class="form-check-input" type="checkbox" id="tipo_de_cliente" name="tipo_de_cliente" value="1" checked onchange="checkbox_fields('cliente')">
 								<label class="form-check-label" for="tipo_de_cliente">Cliente já cadastrado</label>
 							</div>
 							<div class="row g-3" id="campos_mostrar_cliente">
@@ -103,17 +121,18 @@ if($_SESSION['invalid']==1){
 										<option selected disabled value="">Selecionar...</option>
 										<?php
 											# Região de listagem da lista de dados
-											$sql=("SELECT nome from clientes");
+											$sql=("SELECT nome,idclientes from clientes");
 											$consultaNome=mysqli_query($link,$sql);
 											while($dadosClientes=mysqli_fetch_array($consultaNome)){
 												$nome=$dadosClientes[0];
-												echo "<option>".$nome."</option>";
-											}
+												$idclient=$dadosClientes[1];												
+												echo "<option value=$idclient>".$nome."</option>";
+											}											
 										?>
 									</select>
 								</div>
 							</div>
-							<div class="row g-3" id="campos_oculto_cliente">
+							<div class="row g-3" id="campos_oculto_cliente" name="add_cliente" value="1">
 								<div class="col-md-6">
 									<label for="cliente_nome" class="form-label">Nome</label>
 									<input type="text" class="form-control" name="cliente_nome" id="cliente_nome">
@@ -143,16 +162,16 @@ if($_SESSION['invalid']==1){
 						<div id="campo_evento" class="row g-3">
 							<h2 class="display-2 mt-5 pt-5">Evento</h2>
 							<div class="col-md-12">
-								<label for="evento_nome" class="form-label">Nome</label>
-								<input type="text" class="form-control" name="evento_nome" id="evento_nome" required="true">
+								<label for="evento_nome" class="form-label">Nome*</label>
+								<input type="text" class="form-control" name="evento_nome" id="evento_nome" placeholder="Nome do Evento" required="true">
 							</div>
 							<div class="col-md-6">
 								<label for="evento_data" class="form-label">Data</label>
-								<input type="text" class="form-control" data-mask="00/00/0000" name="evento_data" id="evento_data" required="true">
+								<input type="date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" class="form-control" name="evento_data" id="evento_data" required="true">
 							</div>
 							<div class="col-md-6">
 								<label for="evento_hora" class="form-label">Hora</label>
-								<input type="text" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true">
+								<input type="time" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true">
 							</div>
 						</div>
 						
@@ -515,12 +534,11 @@ if($_SESSION['invalid']==1){
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
 						<!-- Região de Manipulação do retornar-->
-						<!-- <?php 
-							if($_SESSION['etapa'] > 1){
-						$_SESSION['retorna']=1;									
-						echo '<button class="btn btn-primary"  onclick="console.log(window)">'.'Retornar'.'</button>';
-						};
-						?>						 -->
+						 <?php 
+						// if($_SESSION['etapa'] > 1){								
+						// 	echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
+						// };
+						// ?> 
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 						<p id="result"></p>
 					</div>

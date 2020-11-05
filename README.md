@@ -10,6 +10,8 @@
 
 ~~~MySQL
 alter table configuracoes MODIFY campos_cadastro json
+ALTER TABLE webevent.lives MODIFY COLUMN flag_convidados int(1) NULL;
+alter table lives change nome nome varchar(150) not null
 ~~~
 ~~~PHP
 $link->set_charset("utf8");
@@ -50,6 +52,29 @@ Uma forma básica de como utilizar o componente:
 
 
 ## Propriedades
+
+## Testes
+
+-Pegando ID ao selecionar Cliente
+*Destruir valor para enviar via post ao selecionar campos escondidos (linha133)
+ if checkbox ok get (idcliente) else generator
+
+** Testes
+
+Etapa1
+
+#Cliente ok
+-Sem Cliente [Não avança] ok
+-Selecionado apenas Cliente ( Seleciona) [better] corrigir no campo evento
+-Selecionando Cliente e deixando para cadastro  ok
+
+#Evento
+- Criação apenas com a Inserção de 2 Caracteres ok
+- Gravação no Banco apenas com a condição acima ok
+- Datas e Horas respeitando regras de formatos( nao aceita 35/12/2020) ok 
+
+
+
 
 
 
