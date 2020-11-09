@@ -1,16 +1,18 @@
 
 <?php 
 session_start();
+#$_SESSION['etapa']=4;
+
 if($_SESSION['etapa']==1){
 	$_SESSION['invalid']=0;
 }
 
-if($_SESSION['etapa']==2){
+if($_SESSION['etapa']>1){
 	echo "Evento ID".$_SESSION['evento_id'];
 	echo"<br>";
 	echo "Cliente ID".$_SESSION['cliente_id'];
 	echo"<br>";
-	echo "Message:".$_SESSION['msg'];
+    echo "Message:".$_SESSION['msg'];
 }
 
 if($_SESSION['invalid']==1){
@@ -189,7 +191,7 @@ if($_SESSION['invalid']==1){
 								<?php if($_SESSION['list_convidados'] == 0){?>
 									<div class="convidados">
 										<div class="convidado row">
-											<div class="col-auto"><div class="foto_convidado"><img src="../assets/img/icon.png" alt=""></div></div>
+											<div class="col-auto"><div class="foto_convidado"><img src="../assets/img/icon.png" alt="foto"></div></div>											
 											<div class="col-3"><b>Nome</b><br><input class="form-control" type="text" id="nome_convidado" value="" disabled></div>
 											<div class="col-3"><b>Link do Currículo</b><br><input class="form-control" type="text" id="link_convidado" value="" disabled></div>
 											<div class="col-3"><b>Mini Bio</b><br><input class="form-control" type="text" id="bio_convidado" value="" disabled></div>

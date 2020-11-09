@@ -49,7 +49,7 @@ if($etapa == 1){
     $evento_hora = mysqli_real_escape_string($link, $_POST['evento_hora']);
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
-    $_SESSION['$cliente_id']=$cliente_id;
+    $_SESSION['cliente_id']=$cliente_id;
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
