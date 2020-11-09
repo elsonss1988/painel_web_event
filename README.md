@@ -55,10 +55,6 @@ Uma forma básica de como utilizar o componente:
 
 ## Testes
 
--Pegando ID ao selecionar Cliente
-*Destruir valor para enviar via post ao selecionar campos escondidos (linha133)
- if checkbox ok get (idcliente) else generator
-
 ** Testes
 
 Etapa1

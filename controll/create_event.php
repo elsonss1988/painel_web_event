@@ -10,12 +10,12 @@ foreach ($_POST as $key => $value){
 
 $etapa = $_SESSION['etapa'];
 
-//retornar ao inicio
-$retornar = $_POST['retorna'];	
-if($retornar =="1"){
-    $_SESSION['etapa']=0;   
-    header('Location: ../install/');
-}
+// //retornar ao inicio
+// $retornar = $_POST['retorna'];	
+// if($retornar =="1"){
+//     $_SESSION['etapa']=0;   
+//     header('Location: ../install/');
+// }
 // Adiciona cliente e dados básicos do evento
 # Abre Etapa 1
 if($etapa == 1){
@@ -172,7 +172,13 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-    $_SESSION['etapa'] = 4;
+    $player1=$_POST['transmissao_player1'];
+    $_SESSION['msg']=$player1;
+    if ((strlen($player1))>1){
+        $_SESSION['etapa'] = 4;
+    }else{
+        $_SESSION['invalid']=1;
+    };
 }
 if($etapa == 4){
     
@@ -204,7 +210,8 @@ if($etapa == 4){
                 $cadastro->flag=1;
                 $_SESSION['etapa'] =5;
                 $cadastroJson=json_encode($cadastro);
-                add_cadastro($cadastroJson); 
+                $evento_id=$_SESSION['evento_id'];
+                add_cadastro($cadastroJson,$evento_id); 
                 #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
                 #mysqli_query($link, $sql);
                 break;   

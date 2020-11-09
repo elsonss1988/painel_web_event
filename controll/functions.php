@@ -179,9 +179,10 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 }
 
 // Adiciona cadastro
-function add_cadastro($cadastroJson){
-    require '../connect/connect.php';
-    $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
+function add_cadastro($cadastroJson,$evento_id){
+    require '../connect/connect.php';    
+    #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
+    $sql="UPDATE configuracoes SET campos_cadastro=$cadastroJson WHERE lives_idlives like $evento_id";
     #mysqli_query($link, $sql);
     if (mysqli_query($link, $sql)) {
         return 1;
