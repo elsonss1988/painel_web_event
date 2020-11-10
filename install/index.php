@@ -1,7 +1,7 @@
 
 <?php 
 session_start();
-#$_SESSION['etapa']=4;
+$_SESSION['etapa']=4;
 
 if($_SESSION['etapa']==1){
 	$_SESSION['invalid']=0;

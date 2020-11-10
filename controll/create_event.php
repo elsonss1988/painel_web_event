@@ -145,13 +145,18 @@ if($etapa == 2){
         $add_personalizacao = add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo, $personalizacao_cor1, $personalizacao_cor2, $tipo_de_convidados);
         if($add_personalizacao == 1){
             $_SESSION['etapa'] = 3;
+            $evento_id = $_SESSION['evento_id'];
+            $insert_linha_configuracao = insert_linha_configuracao($evento_id);
+            $_SESSION['msg']= $insert_linha_configuracao;
+            
         }
     }
 }
 
 if($etapa == 3){
     $evento_id = $_SESSION['evento_id'];
-    $insert_linha_configuracao = insert_linha_configuracao($evento_id);
+    #$insert_linha_configuracao = insert_linha_configuracao($evento_id);
+    $_SESSION['msg']= $insert_linha_configuracao;
     
     if(!isset($_GET['f'])){
         $f = "";
@@ -172,7 +177,9 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-    $_SESSION['etapa'] = 4;
+    if((strlen($transmissao_player1))>1){
+        $_SESSION['etapa'] = 4;
+    }
 }
 if($etapa == 4){
     
@@ -204,7 +211,7 @@ if($etapa == 4){
                 $cadastro->flag=1;
                 $_SESSION['etapa'] =5;
                 $cadastroJson=json_encode($cadastro);
-                add_cadastro($cadastroJson); 
+                add_cadastro($evento_id,$cadastroJson); 
                 #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
                 #mysqli_query($link, $sql);
                 break;   
