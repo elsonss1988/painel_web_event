@@ -182,31 +182,9 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 // Adiciona cadastro
 function add_cadastro($evento_id,$cadastroJson){
     require '../connect/connect.php';
-
-    $cadastro= new stdClass;    
-    $cadastro->nome=isset($_POST['campo_nome'])?1:null;
-    $cadastro->sobrenome= isset($_POST['campo_sobrenome'])?1:null;
-    $cadastro->email= isset($_POST['campo_email'])?1:null;
-    $cadastro->telefone= isset($_POST['campo_telefone'])?1:null;
-    $cadastro->celular= isset($_POST['campo_celular'])?1:null;
-    $cadastro->empresa=  isset($_POST['campo_empresa'])?1:null;
-    $cadastro->cargo= isset($_POST['campo_cargo'])?1:null;
-    $cadastro->especialidade= isset($_POST['campo_especialidade'])?1:null;
-    $cadastro->ufcrm= isset($_POST['campo_ufcrm'])?1:null;
-    $cadastro->senha= isset($_POST['campo_senha'])?1:null;
-    
     #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (1000,'MegaPlay','$cadastroJson')";
     $_SESSION['msg']=$cadastroJson;
-    $sql="UPDATE configuracoes SET campos_cadastro=JSON_SET(campos_cadastro, '$.nome','$cadastro->nome',
-                                                            '$.sobrenome','$cadastro->sobrenome',
-                                                            '$.email','$cadastro->email',
-                                                            '$.telefone','$cadastro->telefone',
-                                                            '$.celular','$cadastro->celular',
-                                                            '$.empresa','$cadastro->empresa',
-                                                            '$.cargo','$cadastro->cargo',
-                                                            '$.especialidade','$cadastro->especialidade',
-                                                            '$.ufcrm','$cadastro->ufcrm',
-                                                            '$.senha','$cadastro->senha') WHERE lives_idlives = 124";
+    $sql="UPDATE configuracoes SET campos_cadastro='$cadastroJson' WHERE lives_idlives =$evento_id";
 
     if (mysqli_query($link, $sql)) {
         return 1;
@@ -229,8 +207,12 @@ function add_login($evento_id, $campos_login){
 }
 
 // Adiciona mensagens
-function add_mensagens(){
+function add_mensagem($evento_id,$texto_email_cadastro,$texto_email_nova_senha){
     require '../connect/connect.php';
+    $sql=("UPDATE `configuracoes` SET `mensagem_cadastro`='$texto_email_cadastro', `mensagem_reset_mail`='$texto_email_nova_senha' WHERE lives_idlives = '$evento_id'");
+    mysqli_query($link, $sql);
+    mysqli_close($link);
+
 }
 
 

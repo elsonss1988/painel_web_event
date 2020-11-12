@@ -11,18 +11,18 @@ foreach ($_POST as $key => $value){
 $etapa = $_SESSION['etapa'];
 
 //retornar ao inicio
-$retornar = $_POST['retorna'];	
-if($retornar =="1"){
-    $_SESSION['etapa']=0;   
+ $retornar = $_POST['retornar'];	
+  if($retornar =="1"){    
+    $_SESSION['etapa']=$_SESSION['etapa']-1;
+    $_SESSION['msg']=$_SESSION['etapa'];      
     header('Location: ../install/');
 }
 // Adiciona cliente e dados básicos do evento
 # Abre Etapa 1
 if($etapa == 1){
-
+    $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
     if(isset($_POST['tipo_de_cliente'])){
-        echo "Message:".$_SESSION['msg']='Cadastrado';
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
@@ -33,7 +33,6 @@ if($etapa == 1){
             #$_SESSION['cliente_id']=$cliente_id;
         }
     }else{
-        echo "Message:".$_SESSION['msg']='Não cadastrado';
         //Caso checkbox desmarcado cadastrar o cliente
         $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
         $cliente_site = mysqli_real_escape_string($link, $_POST['cliente_site']);
@@ -58,9 +57,11 @@ if($etapa == 1){
     
     // muda etapa e redireciona conforme q validade dos dados
     if($evento_id=="" || ((strlen($evento_nome))<1)){
-        $_SESSION['etapa'] = 1;
+        $_SESSION['invalid']=1;
+        $_SESSION['etapa'] = 1;     
     }else{
         $_SESSION['etapa'] = 2;
+        $_SESSION['fail'] = 0;
     }
 }
 # Fecha Etapa 1
@@ -137,7 +138,7 @@ if($etapa == 2){
         $personalizacao_logo = $_FILES['personalizacao_logo'];
         $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
         $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
-        if(isset($_POST['tipo_de_convidados'])){
+        if((isset($_POST['tipo_de_convidados'])) && (array_count_values($_SESSION['list_convidados'])>0)){
             $tipo_de_convidados = mysqli_real_escape_string($link, $_POST['tipo_de_convidados']);
         } else {
             $tipo_de_convidados = 0;
@@ -145,9 +146,9 @@ if($etapa == 2){
         $add_personalizacao = add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo, $personalizacao_cor1, $personalizacao_cor2, $tipo_de_convidados);
         if($add_personalizacao == 1){
             $_SESSION['etapa'] = 3;
+            unset($_SESSION['list_convidados']);
             $evento_id = $_SESSION['evento_id'];
-            $insert_linha_configuracao = insert_linha_configuracao($evento_id);
-            $_SESSION['msg']= $insert_linha_configuracao;
+            $insert_linha_configuracao = insert_linha_configuracao($evento_id);           
             
         }
     }
@@ -179,6 +180,14 @@ if($etapa == 3){
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
     if((strlen($transmissao_player1))>1){
         $_SESSION['etapa'] = 4;
+        $_SESSION['invalid']=0;
+    }
+    else if(isset($_POST['retornar'])){
+        $_SESSION['etapa']=$_SESSION['etapa']-1;
+        $_SESSION['msg']=$_SESSION['etapa'];      
+        header('Location: ../install/');             
+    }else{
+        $_SESSION['invalid']=1;
     }
 }
 if($etapa == 4){
@@ -194,6 +203,7 @@ if($etapa == 4){
         $cadastro->especialidade= isset($_POST['campo_especialidade'])?1:null;
         $cadastro->ufcrm= isset($_POST['campo_ufcrm'])?1:null;
         $cadastro->senha= isset($_POST['campo_senha'])?1:null;
+        $evento_id = $_SESSION['evento_id'];
         
         if($cadastro->senha){
             $cadastro->senha_padrao= isset($_POST['senha_padrao'])?1:null;
@@ -201,23 +211,22 @@ if($etapa == 4){
             $cadastro->senha_campo= isset($_POST['senha_campo'])?$_POST['senha_campo']:null;
         }
 
-        if($cadastro->senha){
-            $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null;
+        if($cadastro->ufcrm){
+            $cadastro->valida_crm= isset($_POST['valida_crm'])?1:null; 
+        }
+
+        if($cadastro->email){
             $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
         }
                       
         foreach($cadastro as $propName => $propValue ){    
-            if (($propValue)){
-                $cadastro->flag=1;
+            if (($propValue)){                
                 $_SESSION['etapa'] =5;
+                $_SESSION['invalid']=0;
                 $cadastroJson=json_encode($cadastro);
                 add_cadastro($evento_id,$cadastroJson); 
-                #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
-                #mysqli_query($link, $sql);
-                break;   
             }else{
                 $_SESSION['invalid']=1;
-                $cadastro->flag=0;
                 $_SESSION['etapa'] =4;
             }
         }
@@ -254,12 +263,10 @@ if($etapa == 5){
 }
 
 if($etapa == 6){
-  
+    $evento_id = $_SESSION['evento_id'];
     $texto_email_cadastro = mysqli_real_escape_string($link, $_POST['texto_email_cadastro']);
     $texto_email_nova_senha = mysqli_real_escape_string($link, $_POST['texto_email_nova_senha']);
-    $sql=("UPDATE `configuracoes` SET `mensagem_cadastro`='$texto_email_cadastro', `mensagem_reset_mail`='$texto_email_nova_senha' WHERE `id` like 1 ");
-    mysqli_query($link, $sql);
-    mysqli_close($link);
+    add_mensagem($evento_id,$texto_email_cadastro,$texto_email_nova_senha);
     $_SESSION['etapa'] = 7;
 };
 
