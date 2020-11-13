@@ -2,8 +2,6 @@
 <?php 
 session_start();
 
-#$_SESSION['etapa']=2;
-
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
 isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
 isset($_SESSION['etapa'])?$_SESSION['etapa']:$_SESSION['etapa']=1;
@@ -12,31 +10,23 @@ isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 
-
 // if(isset($_SESSION['etapa'])){
-// 	$_SESSION['invalid']=0;
+// 	$invalid=$_SESSION['invalid'];
+// 	$fail=$_SESSION['fail'];
+// 	echo "Cliente ID".$_SESSION['cliente_id'];
+// 	echo"<br>";
+// 	echo "Evento ID".$_SESSION['evento_id'];
+// 	echo"<br>";
+// 	echo "Message:".$_SESSION['msg'];
+// 	echo"<br>";
+// 	echo "Invalid:".$invalid.strval(is_null($_SESSION['invalid']));
+// 	echo"<br>";
+// 	echo "fail:".$fail.strval(is_null($_SESSION['fail']));
+// 	echo"<br>";
+// 	// echo"Lista de Convidados".array_count_values($_SESSION['list_convidados']);
+// 	// echo"<br>";
+// 	//print_r($_SESSION['list_convidados']);
 // }
-
-// if($_SESSION['etapa']>2){
-// echo "Evento ID".$_SESSION['evento_id'];
-// echo"<br>";
-// }
-
-if(isset($_SESSION['etapa'])){
-	$invalid=$_SESSION['invalid'];
-	$fail=$_SESSION['fail'];
-	echo "Cliente ID".$_SESSION['cliente_id'];
-	echo"<br>";
-	echo "Message:".$_SESSION['msg'];
-	echo"<br>";
-	echo "Invalid:".$invalid.strval(is_null($_SESSION['invalid']));
-	echo"<br>";
-	echo "fail:".$fail.strval(is_null($_SESSION['fail']));
-	echo"<br>";
-	// echo"Lista de Convidados".array_count_values($_SESSION['list_convidados']);
-	// echo"<br>";
-	//print_r($_SESSION['list_convidados']);
-}
 
 
 

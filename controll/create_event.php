@@ -12,13 +12,7 @@ $etapa = $_SESSION['etapa'];
 
 //retornar ao inicio
  $retornar = $_POST['retornar'];	
-  if($retornar =="1"){    
-    $_SESSION['etapa']=$_SESSION['etapa']-1;
-    $_SESSION['msg']=$_SESSION['etapa'];      
-    header('Location: ../install/');
-}
-// Adiciona cliente e dados básicos do evento
-# Abre Etapa 1
+
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
@@ -145,10 +139,17 @@ if($etapa == 2){
         }
         $add_personalizacao = add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo, $personalizacao_cor1, $personalizacao_cor2, $tipo_de_convidados);
         if($add_personalizacao == 1){
-            $_SESSION['etapa'] = 3;
-            unset($_SESSION['list_convidados']);
-            $evento_id = $_SESSION['evento_id'];
-            $insert_linha_configuracao = insert_linha_configuracao($evento_id);           
+            if($retornar =="1"){
+                $_SESSION['etapa']=$_SESSION['etapa']-1;
+                $_SESSION['msg']=$_SESSION['etapa']."retornar";      
+                header('Location: ../install/');
+            }
+            else{
+                $_SESSION['etapa'] = 3;
+                unset($_SESSION['list_convidados']);
+                $evento_id = $_SESSION['evento_id'];
+                $insert_linha_configuracao = insert_linha_configuracao($evento_id);
+            }           
             
         }
     }
@@ -218,21 +219,26 @@ if($etapa == 4){
         if($cadastro->email){
             $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
         }
-                      
-        foreach($cadastro as $propName => $propValue ){    
-            if (($propValue)){                
-                $_SESSION['etapa'] =5;
-                $_SESSION['invalid']=0;
-                $cadastroJson=json_encode($cadastro);
-                add_cadastro($evento_id,$cadastroJson); 
-            }else{
-                $_SESSION['invalid']=1;
-                $_SESSION['etapa'] =4;
+
+        if($retornar =="1"){
+            $_SESSION['etapa']=$_SESSION['etapa']-1;
+            $_SESSION['msg']=$_SESSION['etapa']."retornar";      
+            header('Location: ../install/');
+        }else{                      
+            foreach($cadastro as $propName => $propValue ){    
+                if (($propValue)){                
+                    $_SESSION['etapa'] =5;
+                    $_SESSION['invalid']=0;
+                    $cadastroJson=json_encode($cadastro);
+                    add_cadastro($evento_id,$cadastroJson); 
+                }else{
+                    $_SESSION['invalid']=1;
+                    $_SESSION['etapa'] =4;
+                }
             }
         }
-        
-       
 }
+
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];
 
@@ -254,12 +260,17 @@ if($etapa == 5){
     $campo_senha = isset($_POST['campo_senha']) ?  'senha' : '';
     $campos_login = "$login_campo_nome, $login_campo_sobrenome, $login_campo_email, $login_campo_telefone, $login_campo_celular, $login_campo_empresa, $login_campo_cargo, $login_campo_especialidade, $login_campo_uf_crm, $campo_senha";
     $add_login = add_login($evento_id, $campos_login);
-    if(isset($_POST['login_campo_nome']) || isset($_POST['login_campo_sobrenome']) || isset($_POST['login_campo_email']) || isset($_POST['login_campo_telefone']) || isset($_POST['login_campo_celular']) || isset($_POST['login_campo_empresa']) || isset($_POST['login_campo_cargo']) || isset($_POST['login_campo_especialidade']) || isset($_POST['login_campo_uf_crm']) || isset($_POST['campo_senha'])){
-        $_SESSION['etapa'] = 6;
-    }else{
-        $_SESSION['invalid']= 1;
-    }
-    
+    if($retornar =="1"){
+        $_SESSION['etapa']=$_SESSION['etapa']-1;
+        $_SESSION['msg']=$_SESSION['etapa']."retornar";      
+        header('Location: ../install/');
+    }else{ 
+        if(isset($_POST['login_campo_nome']) || isset($_POST['login_campo_sobrenome']) || isset($_POST['login_campo_email']) || isset($_POST['login_campo_telefone']) || isset($_POST['login_campo_celular']) || isset($_POST['login_campo_empresa']) || isset($_POST['login_campo_cargo']) || isset($_POST['login_campo_especialidade']) || isset($_POST['login_campo_uf_crm']) || isset($_POST['campo_senha'])){
+            $_SESSION['etapa'] = 6;
+        }else{
+            $_SESSION['invalid']= 1;
+        }
+    }    
 }
 
 if($etapa == 6){
@@ -267,7 +278,13 @@ if($etapa == 6){
     $texto_email_cadastro = mysqli_real_escape_string($link, $_POST['texto_email_cadastro']);
     $texto_email_nova_senha = mysqli_real_escape_string($link, $_POST['texto_email_nova_senha']);
     add_mensagem($evento_id,$texto_email_cadastro,$texto_email_nova_senha);
-    $_SESSION['etapa'] = 7;
+    if($retornar =="1"){
+        $_SESSION['etapa']=$_SESSION['etapa']-1;
+        $_SESSION['msg']=$_SESSION['etapa']."retornar";      
+        header('Location: ../install/');
+    }else{ 
+        $_SESSION['etapa'] = 7;
+    }
 };
 
 header('Location: ../install/');

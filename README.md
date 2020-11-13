@@ -25,11 +25,9 @@ $link->set_charset("utf8");
 - [X] Adiciona cadastro
 - [X] Adiciona login
 - [x] Adiciona mensagens
-- [ ] Travamento
-- [ ] Gravação completa
-- [ ] Dashboard
-- [ ] Separa imagens carregadas das imagens do projeto
-
+- [x] Travamento
+- [x] Gravação completa
+- [x] Dashboard
 
 
 ## Como usar
@@ -39,39 +37,6 @@ Em desenvovilmento
 ```
 
 
-## Como instalar
-
-```
-Em desenvovilmento
-```
-
-
-
-Uma forma básica de como utilizar o componente:
-
-
-
-## Propriedades
-
-## Testes
-
--Pegando ID ao selecionar Cliente
-*Destruir valor para enviar via post ao selecionar campos escondidos (linha133)
- if checkbox ok get (idcliente) else generator
-
-** Testes
-
-Etapa1
-
-#Cliente ok
--Sem Cliente [Não avança] ok
--Selecionado apenas Cliente ( Seleciona) [better] corrigir no campo evento
--Selecionando Cliente e deixando para cadastro  ok
-
-#Evento
-- Criação apenas com a Inserção de 2 Caracteres ok
-- Gravação no Banco apenas com a condição acima ok
-- Datas e Horas respeitando regras de formatos( nao aceita 35/12/2020) ok 
 
 
 
