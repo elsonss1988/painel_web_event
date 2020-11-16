@@ -270,7 +270,8 @@ if($etapa == 5){
         }else{
             $_SESSION['invalid']= 1;
         }
-    }    
+     }
+   }    
 }
 
 if($etapa == 6){
