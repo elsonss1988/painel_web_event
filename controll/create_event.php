@@ -174,7 +174,7 @@ if($etapa == 3){
         $f = "";
     } else{
         $f = mysqli_real_escape_string($link, $_GET['f']);
-}
+    }
 
     if(isset($_POST['interacao_perguntas'])){
         $interacao_perguntas = 1;
