@@ -13,18 +13,15 @@ if($_SESSION['etapa']==2){
 	echo "Message:".$_SESSION['msg'];
 }
 
-if($_SESSION['invalid']==1){
-	echo"<script>
-	confirm('Selecione um Item!')
-	</script>";
-	$_SESSION['invalid']=0;
-}
+isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
+isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
+isset($_SESSION['etapa'])?$_SESSION['etapa']:$_SESSION['etapa']=1;
+isset($_SESSION['list_convidados'])?$_SESSION['list_convidados']:$_SESSION['list_convidados']=0;
+isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0;
+isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
+isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 
-// $retornar = $_SESSION['retorna'];	
-// if($retornar ==1){
-//     $_SESSION['etapa']=0;   
-//     header('Location: ../install/');
-// }
+
 
 ?>
 
@@ -116,7 +113,7 @@ if($_SESSION['invalid']==1){
 							</div>
 							<div class="row g-3" id="campos_mostrar_cliente">
 								<div class="col-md-12">
-									<label for="cliente" class="form-label">Lista de Clientes</label>
+									<label for="cliente" class="form-label">Lista de Clientes*</label>
 									<select class="form-select" id="cliente" name="cliente_id" required="true">
 										<option selected disabled value="">Selecionar...</option>
 										<?php
@@ -155,7 +152,7 @@ if($_SESSION['invalid']==1){
 										</label>
 									</div>
 								</div>
-							</div>
+							</div>							
 						</div>
 						
 						<!-- Evento -->
@@ -174,7 +171,18 @@ if($_SESSION['invalid']==1){
 								<input type="time" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true">
 							</div>
 						</div>
-						
+
+						<?php 
+							if($_SESSION['invalid']==1){								
+								echo "<script>var myToast = Toastify({
+								text: 'Selecione o cliente e Insira o nome do Evento!',
+								duration: 5000
+						        })
+							    myToast.showToast();
+							    </script>";
+							    $_SESSION['invalid']=0;
+							} 
+						?>
 						<?php
 					} if($_SESSION['etapa'] == 2){?>
 						<!-- Convidados -->
@@ -189,7 +197,7 @@ if($_SESSION['invalid']==1){
 								<?php if($_SESSION['list_convidados'] == 0){?>
 									<div class="convidados">
 										<div class="convidado row">
-											<div class="col-auto"><div class="foto_convidado"><img src="../assets/img/icon.png" alt=""></div></div>
+											<div class="col-auto"><div class="foto_convidado"><img src="../assets/img/icon.png" alt="foto"></div></div>											
 											<div class="col-3"><b>Nome</b><br><input class="form-control" type="text" id="nome_convidado" value="" disabled></div>
 											<div class="col-3"><b>Link do Currículo</b><br><input class="form-control" type="text" id="link_convidado" value="" disabled></div>
 											<div class="col-3"><b>Mini Bio</b><br><input class="form-control" type="text" id="bio_convidado" value="" disabled></div>
@@ -270,8 +278,7 @@ if($_SESSION['invalid']==1){
 								<label for="personalizacao_cor2" class="form-label">Secundária</label>
 								<input type="color" class="form-control form-control-color" id="personalizacao_cor2" name="personalizacao_cor2" value="#ff8d50" title="Choose your color">
 							</div>
-						</div>
-						
+						</div>					
 						<?php
 					} if($_SESSION['etapa'] == 3){?>
 						
@@ -313,6 +320,17 @@ if($_SESSION['invalid']==1){
 								<textarea type="text" class="form-control" name="transmissao_traducao" id="transmissao_traducao" rows="2"></textarea>
 							</div>
 						</div>
+						<?php 
+							if($_SESSION['invalid']==1){							
+								echo "<script>var myToast = Toastify({
+								text: 'Informe o Player Principal',
+								duration: 5000
+						        })
+							    myToast.showToast();
+							    </script>";
+							    $_SESSION['invalid']=0;
+							} 
+						?>
 						
 						<?php
 					} if($_SESSION['etapa'] == 4){?>
@@ -404,7 +422,7 @@ if($_SESSION['invalid']==1){
 										</div>
 									</div>
 									<div class="col-md-6" id="campos_mostrar_senha_padrao">
-										<input type="text" class="form-control" id="senha_do_evento" placeholder="Digite a senha" required>
+										<input type="text" class="form-control" id="senha_do_evento" name="senha_campo" placeholder="Digite a senha" required>
 									</div>
 									<div id="campos_oculto_senha_padrao"></div>
 								</div>
@@ -413,20 +431,30 @@ if($_SESSION['invalid']==1){
 								<b>Validações</b>
 								<div class="col-md-3" id="campo_valida_crm">
 									<div class="form-check form-switch" >
-										<input class="form-check-input" type="checkbox" id="valida_crm" checked>
+										<input class="form-check-input" type="checkbox" name="valida_crm" id="valida_crm" checked>
 										<label class="form-check-label" for="valida_crm">Validar CRM</label>
 									</div>
 								</div>
 								<div class="col-md-4" id="campo_valida_email">
 									<div class="form-check form-switch" >
-										<input class="form-check-input" type="checkbox" id="valida_email" checked>
+										<input class="form-check-input" type="checkbox" name="valida_email" id="valida_email" checked>
 										<label class="form-check-label" for="valida_email">Validar E-mails Duplicados</label>
 									</div>
 								</div>
 							</div>
 							<div id="campos_oculto_cadastro">
 							</div>
-							
+							<?php 
+								if($_SESSION['etapa']==4 && $_SESSION['invalid']==1){																
+									echo "<script>var myToast = Toastify({
+									text: 'Selecione um Item',
+									duration: 5000
+									})
+									myToast.showToast();
+									</script>";
+									$_SESSION['invalid']=0;
+								} 
+							?>
 						</div>
 											
 						<?php 
@@ -496,10 +524,10 @@ if($_SESSION['invalid']==1){
 							</div>
 							<?php 
 								if($_SESSION['etapa']==1){
-									$_SESSION['invalid']=0;
+									$_SESSION['invalid']=10;
 								}
 
-								if($_SESSION['invalid']==1){
+								if($_SESSION['etapa']==5 && $_SESSION['invalid']==1){
 									echo "<script>var myToast = Toastify({
 										text: 'Selecione pelo menos um item!',
 										duration: 5000
@@ -533,12 +561,14 @@ if($_SESSION['invalid']==1){
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
-						<!-- Região de Manipulação do retornar-->
+
+						<!-- Região de Manipulação do retornar -->
 						 <?php 
-						// if($_SESSION['etapa'] > 1){								
-						// 	echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
-						// };
-						// ?> 
+						if($_SESSION['etapa'] > 1){								
+							echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
+						};
+						?> 
+
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 						<p id="result"></p>
 					</div>

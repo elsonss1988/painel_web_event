@@ -146,7 +146,8 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
 // Adiciona uma linha na tabela configuracao
 function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
-    $sql="INSERT INTO `configuracoes` (`lives_idlives`, `perguntas`, `frame_chat`, `player1`, `player2`, `player_traducao`, `campos_cadastro`, `valida_crm`, `valida_email`, `tipo_senha`, `senha_padrao`, `campos_login`, `mensagem_cadastro`, `mensagem_reset_mail`) VALUES ('$evento_id', 'perguntas','frame_chat','player1','player2','player_traducao','campos_cadastro',0,0,0,'senha_padrao','campos_login','mensagem_cadastro','mensagem_reset_mail')";
+    #$sql="INSERT INTO `configuracoes` (`lives_idlives`, `perguntas`, `frame_chat`, `player1`, `player2`, `player_traducao`, `campos_cadastro`, `valida_crm`, `valida_email`, `tipo_senha`, `senha_padrao`, `campos_login`, `mensagem_cadastro`, `mensagem_reset_mail`) VALUES ('$evento_id', 0,'frame_chat','player1','player2','player_traducao',{},0,0,0,'senha_padrao','campos_login','mensagem_cadastro','mensagem_reset_mail')";
+    $sql="INSERT INTO `configuracoes` (`lives_idlives`, `perguntas`, `player1`) VALUES ('$evento_id', 0,'player1')";
     if (mysqli_query($link, $sql)) {
         return mysqli_insert_id($link);
     } 
@@ -179,10 +180,12 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 }
 
 // Adiciona cadastro
-function add_cadastro($cadastroJson){
+function add_cadastro($evento_id,$cadastroJson){
     require '../connect/connect.php';
-    $sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
-    #mysqli_query($link, $sql);
+    #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (1000,'MegaPlay','$cadastroJson')";
+    $_SESSION['msg']=$cadastroJson;
+    $sql="UPDATE configuracoes SET campos_cadastro='$cadastroJson' WHERE lives_idlives =$evento_id";
+
     if (mysqli_query($link, $sql)) {
         return 1;
     } 
@@ -204,8 +207,12 @@ function add_login($evento_id, $campos_login){
 }
 
 // Adiciona mensagens
-function add_mensagens(){
+function add_mensagem($evento_id,$texto_email_cadastro,$texto_email_nova_senha){
     require '../connect/connect.php';
+    $sql=("UPDATE `configuracoes` SET `mensagem_cadastro`='$texto_email_cadastro', `mensagem_reset_mail`='$texto_email_nova_senha' WHERE lives_idlives = '$evento_id'");
+    mysqli_query($link, $sql);
+    mysqli_close($link);
+
 }
 
 

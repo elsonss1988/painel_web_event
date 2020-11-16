@@ -25,11 +25,9 @@ $link->set_charset("utf8");
 - [X] Adiciona cadastro
 - [X] Adiciona login
 - [x] Adiciona mensagens
-- [ ] Travamento
-- [ ] Gravação completa
-- [ ] Dashboard
-- [ ] Separa imagens carregadas das imagens do projeto
-
+- [x] Travamento
+- [x] Gravação completa
+- [x] Dashboard
 
 
 ## Como usar
@@ -39,19 +37,9 @@ Em desenvovilmento
 ```
 
 
-## Como instalar
-
-```
-Em desenvovilmento
-```
 
 
 
-Uma forma básica de como utilizar o componente:
-
-
-
-## Propriedades
 
 ## Testes
 
