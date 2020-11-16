@@ -10,8 +10,6 @@ isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 
-
-
 ?>
 
 <!doctype html>
