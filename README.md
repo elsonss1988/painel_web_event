@@ -10,6 +10,8 @@
 
 ~~~MySQL
 alter table configuracoes MODIFY campos_cadastro json
+ALTER TABLE webevent.lives MODIFY COLUMN flag_convidados int(1) NULL;
+alter table lives change nome nome varchar(150) not null
 ~~~
 ~~~PHP
 $link->set_charset("utf8");
@@ -23,11 +25,9 @@ $link->set_charset("utf8");
 - [X] Adiciona cadastro
 - [X] Adiciona login
 - [x] Adiciona mensagens
-- [ ] Travamento
-- [ ] Gravação completa
-- [ ] Dashboard
-- [ ] Separa imagens carregadas das imagens do projeto
-
+- [x] Travamento
+- [x] Gravação completa
+- [x] Dashboard
 
 
 ## Como usar
@@ -37,19 +37,9 @@ Em desenvovilmento
 ```
 
 
-## Como instalar
-
-```
-Em desenvovilmento
-```
 
 
 
-Uma forma básica de como utilizar o componente:
-
-
-
-## Propriedades
 
 
 
