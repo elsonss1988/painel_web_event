@@ -1,17 +1,15 @@
 
 <?php 
 session_start();
-if($_SESSION['etapa']==1){
-	$_SESSION['invalid']=0;
-}
 
-if($_SESSION['etapa']==2){
+if($_SESSION['etapa']>1){
 	echo "Evento ID".$_SESSION['evento_id'];
 	echo"<br>";
 	echo "Cliente ID".$_SESSION['cliente_id'];
 	echo"<br>";
-	echo "Message:".$_SESSION['msg'];
+    echo "Message:".$_SESSION['msg'];
 }
+
 
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
 isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
@@ -20,7 +18,6 @@ isset($_SESSION['list_convidados'])?$_SESSION['list_convidados']:$_SESSION['list
 isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0;
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
-
 
 
 ?>
