@@ -1,11 +1,6 @@
 
 <?php 
 session_start();
-#$_SESSION['etapa']=4;
-
-if($_SESSION['etapa']==1){
-	$_SESSION['invalid']=0;
-}
 
 if($_SESSION['etapa']>1){
 	echo "Evento ID".$_SESSION['evento_id'];
@@ -15,7 +10,7 @@ if($_SESSION['etapa']>1){
     echo "Message:".$_SESSION['msg'];
 }
 
-<<<<<<< HEAD
+
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
 isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
 isset($_SESSION['etapa'])?$_SESSION['etapa']:$_SESSION['etapa']=1;
@@ -23,20 +18,7 @@ isset($_SESSION['list_convidados'])?$_SESSION['list_convidados']:$_SESSION['list
 isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0;
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
-=======
-if($_SESSION['invalid']==1){
-	echo"<script>
-	confirm('Selecione um Item!')
-	</script>";
-	$_SESSION['invalid']=0;
-}
 
-// $retornar = $_SESSION['retorna'];	
-// if($retornar ==1){
-//     $_SESSION['etapa']=0;   
-//     header('Location: ../install/');
-// }
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
 
 ?>
 
@@ -576,21 +558,14 @@ if($_SESSION['invalid']==1){
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
-<<<<<<< HEAD
+
 						<!-- Região de Manipulação do retornar -->
 						 <?php 
 						if($_SESSION['etapa'] > 1){								
 							echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
 						};
 						?> 
-=======
-						<!-- Região de Manipulação do retornar-->
-						 <?php 
-						// if($_SESSION['etapa'] > 1){								
-						// 	echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
-						// };
-						// ?> 
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
+
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 						<p id="result"></p>
 					</div>

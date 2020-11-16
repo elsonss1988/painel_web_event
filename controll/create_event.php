@@ -11,29 +11,20 @@ foreach ($_POST as $key => $value){
 
 $etapa = $_SESSION['etapa'];
 
-<<<<<<< HEAD
+
 //retornar ao inicio
+
  $retornar = $_POST['retornar'];	
 
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
     if(isset($_POST['tipo_de_cliente'])){
-=======
-// //retornar ao inicio
-// $retornar = $_POST['retorna'];	
-// if($retornar =="1"){
-//     $_SESSION['etapa']=0;   
-//     header('Location: ../install/');
-// }
-// Adiciona cliente e dados básicos do evento
-# Abre Etapa 1
-if($etapa == 1){
 
+if($etapa == 1){
+    $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
     if(isset($_POST['tipo_de_cliente'])){
-        echo "Message:".$_SESSION['msg']='Cadastrado';
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
@@ -44,10 +35,6 @@ if($etapa == 1){
             #$_SESSION['cliente_id']=$cliente_id;
         }
     }else{
-<<<<<<< HEAD
-=======
-        echo "Message:".$_SESSION['msg']='Não cadastrado';
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
         //Caso checkbox desmarcado cadastrar o cliente
         $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
         $cliente_site = mysqli_real_escape_string($link, $_POST['cliente_site']);
@@ -63,11 +50,8 @@ if($etapa == 1){
     $evento_hora = mysqli_real_escape_string($link, $_POST['evento_hora']);
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
-<<<<<<< HEAD
     $_SESSION['cliente_id']=$cliente_id;
-=======
-    $_SESSION['$cliente_id']=$cliente_id;
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
+
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
@@ -76,17 +60,12 @@ if($etapa == 1){
     
     // muda etapa e redireciona conforme q validade dos dados
     if($evento_id=="" || ((strlen($evento_nome))<1)){
-<<<<<<< HEAD
+
         $_SESSION['invalid']=1;
         $_SESSION['etapa'] = 1;     
     }else{
         $_SESSION['etapa'] = 2;
         $_SESSION['fail'] = 0;
-=======
-        $_SESSION['etapa'] = 1;
-    }else{
-        $_SESSION['etapa'] = 2;
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
     }
 }
 # Fecha Etapa 1
@@ -210,7 +189,7 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-<<<<<<< HEAD
+
     if((strlen($transmissao_player1))>1){
         $_SESSION['etapa'] = 4;
         $_SESSION['invalid']=0;
@@ -222,15 +201,6 @@ if($etapa == 3){
     }else{
         $_SESSION['invalid']=1;
     }
-=======
-    $player1=$_POST['transmissao_player1'];
-    $_SESSION['msg']=$player1;
-    if ((strlen($player1))>1){
-        $_SESSION['etapa'] = 4;
-    }else{
-        $_SESSION['invalid']=1;
-    };
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
 }
 if($etapa == 4){
     
@@ -260,7 +230,7 @@ if($etapa == 4){
         if($cadastro->email){
             $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
         }
-<<<<<<< HEAD
+
 
         if($retornar =="1"){
             $_SESSION['etapa']=$_SESSION['etapa']-1;
@@ -277,26 +247,8 @@ if($etapa == 4){
                     $_SESSION['invalid']=1;
                     $_SESSION['etapa'] =4;
                 }
-=======
-                      
-        foreach($cadastro as $propName => $propValue ){    
-            if (($propValue)){
-                $cadastro->flag=1;
-                $_SESSION['etapa'] =5;
-                $cadastroJson=json_encode($cadastro);
-                $evento_id=$_SESSION['evento_id'];
-                add_cadastro($cadastroJson,$evento_id); 
-                #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (10,'MegaPlay','$cadastroJson')";
-                #mysqli_query($link, $sql);
-                break;   
-            }else{
-                $_SESSION['invalid']=1;
-                $cadastro->flag=0;
-                $_SESSION['etapa'] =4;
->>>>>>> ddcc1027b099c21d80e2a0b0c68648af660a4383
             }
         }
-}
 
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];

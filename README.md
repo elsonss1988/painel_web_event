@@ -43,10 +43,6 @@ Em desenvovilmento
 
 ## Testes
 
-** Testes
-
-Etapa1
-
 #Cliente ok
 -Sem Cliente [Não avança] ok
 -Selecionado apenas Cliente ( Seleciona) [better] corrigir no campo evento
