@@ -11,12 +11,14 @@ foreach ($_POST as $key => $value){
 $etapa = $_SESSION['etapa'];
 
 //retornar ao inicio
+
  $retornar = $_POST['retornar'];	
 
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
     if(isset($_POST['tipo_de_cliente'])){
+
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
@@ -43,6 +45,7 @@ if($etapa == 1){
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
     $_SESSION['cliente_id']=$cliente_id;
+
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
@@ -55,7 +58,8 @@ if($etapa == 1){
         $_SESSION['etapa'] = 1;     
     }else{
         $_SESSION['etapa'] = 2;
-        $_SESSION['fail'] = 0;
+        $_SESSION['invalid'] = 0;
+
     }
 }
 # Fecha Etapa 1

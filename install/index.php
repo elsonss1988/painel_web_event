@@ -1,6 +1,17 @@
 
 <?php 
 session_start();
+if($_SESSION['etapa']==1){
+	$_SESSION['invalid']=0;
+}
+
+if($_SESSION['etapa']==2){
+	echo "Evento ID".$_SESSION['evento_id'];
+	echo"<br>";
+	echo "Cliente ID".$_SESSION['cliente_id'];
+	echo"<br>";
+	echo "Message:".$_SESSION['msg'];
+}
 
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
 isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
@@ -550,12 +561,14 @@ isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
+
 						<!-- Região de Manipulação do retornar -->
 						 <?php 
 						if($_SESSION['etapa'] > 1){								
 							echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
 						};
 						?> 
+
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 						<p id="result"></p>
 					</div>
