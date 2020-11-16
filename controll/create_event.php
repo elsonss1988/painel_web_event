@@ -11,20 +11,13 @@ foreach ($_POST as $key => $value){
 
 $etapa = $_SESSION['etapa'];
 
-
 //retornar ao inicio
-
  $retornar = $_POST['retornar'];	
 
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){
-
-if($etapa == 1){
-    $_SESSION["count"]=1;
-    //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){
+    if(isset($_POST['tipo_de_cliente'])){								 
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
@@ -51,7 +44,6 @@ if($etapa == 1){
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
     $_SESSION['cliente_id']=$cliente_id;
-
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
@@ -60,7 +52,6 @@ if($etapa == 1){
     
     // muda etapa e redireciona conforme q validade dos dados
     if($evento_id=="" || ((strlen($evento_nome))<1)){
-
         $_SESSION['invalid']=1;
         $_SESSION['etapa'] = 1;     
     }else{
@@ -174,7 +165,7 @@ if($etapa == 3){
         $f = "";
     } else{
         $f = mysqli_real_escape_string($link, $_GET['f']);
-    }
+	}
 
     if(isset($_POST['interacao_perguntas'])){
         $interacao_perguntas = 1;
@@ -189,7 +180,6 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-
     if((strlen($transmissao_player1))>1){
         $_SESSION['etapa'] = 4;
         $_SESSION['invalid']=0;
@@ -231,7 +221,6 @@ if($etapa == 4){
             $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
         }
 
-
         if($retornar =="1"){
             $_SESSION['etapa']=$_SESSION['etapa']-1;
             $_SESSION['msg']=$_SESSION['etapa']."retornar";      
@@ -250,6 +239,7 @@ if($etapa == 4){
             }
         }
 
+    }
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];
 
