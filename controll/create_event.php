@@ -19,12 +19,7 @@ $etapa = $_SESSION['etapa'];
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){
-
-if($etapa == 1){
-    $_SESSION["count"]=1;
-    //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){
+    if(isset($_POST['tipo_de_cliente'])){								 
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
@@ -174,7 +169,7 @@ if($etapa == 3){
         $f = "";
     } else{
         $f = mysqli_real_escape_string($link, $_GET['f']);
-}
+	}
 
     if(isset($_POST['interacao_perguntas'])){
         $interacao_perguntas = 1;
@@ -250,6 +245,7 @@ if($etapa == 4){
             }
         }
 
+    }
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];
 
