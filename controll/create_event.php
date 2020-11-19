@@ -12,9 +12,7 @@ foreach ($_POST as $key => $value){
 //Ambinete de Keep Value
 $etapa = $_SESSION['etapa'];
 
-
 //retornar ao inicio
-
  $retornar = $_POST['retornar'];	
 
 if($etapa == 1){
@@ -58,7 +56,6 @@ if($etapa == 1){
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
     $_SESSION['cliente_id']=$cliente_id;
-
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         if($_SESSION['evento_id']==0){
@@ -203,7 +200,6 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-
     if((strlen($transmissao_player1))>1){
         $_SESSION['etapa'] = 4;
         $_SESSION['invalid']=0;
@@ -244,7 +240,6 @@ if($etapa == 4){
         if($cadastro->email){
             $cadastro->valida_email= isset($_POST['valida_email'])?1:null;    
         }
-
 
         if($retornar =="1"){
             $_SESSION['etapa']=$_SESSION['etapa']-1;
