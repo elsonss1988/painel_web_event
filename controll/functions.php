@@ -70,6 +70,19 @@ function add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora){
     }
 }
 
+//  Substituir dados de um evento
+
+function replace_evento($cliente_id, $evento_nome, $evento_data, $evento_hora,$evento_id){
+    require '../connect/connect.php';
+    $sql="UPDATE lives SET `clientes_idclientes`=$cliente_id, `nome`='$evento_nome', `data`='$evento_data', `hora`='$evento_hora' WHERE `idlives` like $evento_id";
+    $result = $link->query($sql);
+;
+}
+
+
+
+
+
 // Pega todos os convidados da live
 function get_convidados($evento_id){
     require '../connect/connect.php';

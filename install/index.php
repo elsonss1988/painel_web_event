@@ -2,13 +2,6 @@
 <?php 
 session_start();
 
-if($_SESSION['etapa']>1){
-	echo "Evento ID".$_SESSION['evento_id'];
-	echo"<br>";
-	echo "Cliente ID".$_SESSION['cliente_id'];
-	echo"<br>";
-    echo "Message:".$_SESSION['msg'];
-}
 
 
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
@@ -19,6 +12,25 @@ isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 
+//Client Hold
+isset($_SESSION['cliente_nome'])?$_SESSION['cliente_nome']:$_SESSION['cliente_nome']='';
+isset($_SESSION['cliente_site'])?$_SESSION['cliente_site']:$_SESSION['cliente_site']='';
+isset($_SESSION['cliente_responsavel'])?$_SESSION['cliente_responsavel']:$_SESSION['cliente_responsavel']='';
+isset($_SESSION['cliente_logo'])?$_SESSION['cliente_logo']:$_SESSION['cliente_logo']=[];
+
+//Event Hold
+isset($_SESSION['evento_nome'])?$_SESSION['evento_nome']:$_SESSION['evento_nome']='';
+isset($_SESSION['evento_data'])?$_SESSION['evento_data']:$_SESSION['evento_data']='';
+isset($_SESSION['evento_hora'])?$_SESSION['evento_hora']:$_SESSION['evento_hora']='';
+
+
+if(isset($_SESSION['etapa'])){
+	echo "Evento ID".$_SESSION['evento_id'];
+	echo"<br>";
+	echo "Cliente ID".$_SESSION['cliente_id'];
+	echo"<br>";
+    echo "Message:".$_SESSION['msg'];
+}
 
 ?>
 
@@ -129,43 +141,46 @@ isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 							<div class="row g-3" id="campos_oculto_cliente" name="add_cliente" value="1">
 								<div class="col-md-6">
 									<label for="cliente_nome" class="form-label">Nome</label>
-									<input type="text" class="form-control" name="cliente_nome" id="cliente_nome">
+									<input type="text" class="form-control" name="cliente_nome" id="cliente_nome" value="<?php echo $_SESSION['cliente_nome']?>">
 								</div>
 								<div class="col-md-6">
 									<label for="cliente_site" class="form-label">Site</label>
-									<input type="text" class="form-control" name="cliente_site" id="cliente_site">
+									<input type="text" class="form-control" name="cliente_site" id="cliente_site" value="<?php echo $_SESSION['cliente_site']?>">
 								</div>
 								<div class="col-md-6">
 									<label for="cliente_responsavel" class="form-label">Responsável</label>
-									<input type="text" class="form-control" name="cliente_responsavel" id="cliente_responsavel">
+									<input type="text" class="form-control" name="cliente_responsavel" id="cliente_responsavel" value="<?php echo $_SESSION['cliente_responsavel']?>">
 								</div>
 								<div class="col-md-6">
 									<label for="cliente_logo" class="form-label">Logo</label>
 									<div class="form-file">
-										<input type="file" class="form-file-input" name="cliente_logo" id="cliente_logo">
+										<input type="file" class="form-file-input" name="cliente_logo" id="cliente_logo" >
 										<label class="form-file-label" for="cliente_logo">
 											<span class="form-file-text">Inserir logo da empresa...</span>
 											<span class="form-file-button">Procurar</span>
 										</label>
 									</div>
 								</div>
-							</div>							
+							</div>
+														
 						</div>
+
+
 						
 						<!-- Evento -->
 						<div id="campo_evento" class="row g-3">
 							<h2 class="display-2 mt-5 pt-5">Evento</h2>
 							<div class="col-md-12">
 								<label for="evento_nome" class="form-label">Nome*</label>
-								<input type="text" class="form-control" name="evento_nome" id="evento_nome" placeholder="Nome do Evento" required="true">
+								<input type="text" class="form-control" name="evento_nome" id="evento_nome" placeholder="Nome do Evento" required="true" value="<?php echo $_SESSION['evento_nome']?>">
 							</div>
 							<div class="col-md-6">
 								<label for="evento_data" class="form-label">Data</label>
-								<input type="date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" class="form-control" name="evento_data" id="evento_data" required="true">
+								<input type="date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" class="form-control" name="evento_data" id="evento_data" required="true" value="<?php echo $_SESSION['evento_data']?>">
 							</div>
 							<div class="col-md-6">
 								<label for="evento_hora" class="form-label">Hora</label>
-								<input type="time" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true">
+								<input type="time" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true" value="<?php echo $_SESSION['evento_hora']?>">
 							</div>
 						</div>
 
@@ -558,14 +573,13 @@ isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
-
+						<button class="btn btn-primary" type="submit" value="Reset">Reset</button>
 						<!-- Região de Manipulação do retornar -->
-						 <?php 
+						<?php 
 						if($_SESSION['etapa'] > 1){								
 							echo '<button class="btn btn-primary"  type="submit" name="retornar" value="1">'.'Retornar'.'</button>';
 						};
 						?> 
-
 						<button class="btn btn-primary" type="submit"><?php if($_SESSION['etapa'] == 6){echo 'Iniciar Instalação';} else {echo 'Continuar...';}?></button>
 						<p id="result"></p>
 					</div>

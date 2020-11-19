@@ -9,6 +9,7 @@ foreach ($_POST as $key => $value){
     echo "{$key} = {$value}\r\n";
 }
 
+//Ambinete de Keep Value
 $etapa = $_SESSION['etapa'];
 
 
@@ -32,29 +33,47 @@ if($etapa == 1){
     }else{
         //Caso checkbox desmarcado cadastrar o cliente
         $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
+        $_SESSION['cliente_nome']=$cliente_nome;
         $cliente_site = mysqli_real_escape_string($link, $_POST['cliente_site']);
+        $_SESSION['cliente_site']=$cliente_site;
         $cliente_responsavel = mysqli_real_escape_string($link, $_POST['cliente_responsavel']);
+        $_SESSION['cliente_responsavel']=$cliente_responsavel;
         $cliente_logo = $_FILES['cliente_logo'];
-        $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
+        $_SESSION['cliente_logo']=$cliente_logo;
+        if((strlen($cliente_nome))>1){
+            $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
+        }else{
+            $cliente_id=0;
+        }
         #$_SESSION['cliente_id'] = $cliente_id;
     }    
     
     // Pega dados gerais
     $evento_nome = mysqli_real_escape_string($link, $_POST['evento_nome']);
+    $_SESSION['evento_nome']=$evento_nome;
     $evento_data = mysqli_real_escape_string($link, $_POST['evento_data']);
+    $_SESSION['evento_data']=$evento_data;
     $evento_hora = mysqli_real_escape_string($link, $_POST['evento_hora']);
+    $_SESSION['evento_hora']=$evento_hora;
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
     $_SESSION['cliente_id']=$cliente_id;
 
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
-        $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
-        $_SESSION['evento_id'] = $evento_id;
+        if($_SESSION['evento_id']==0){
+            $evento_id = add_evento($cliente_id, $evento_nome, $evento_data, $evento_hora);
+            $_SESSION['evento_id'] = $evento_id;
+            $_SESSION['msg']='Atribuindo ID';
+        }else{            
+             $evento_id=$_SESSION['evento_id'];
+             $_SESSION['msg']='Recuperando ID';
+             replace_evento($cliente_id, $evento_nome, $evento_data, $evento_hora, $evento_id);
+        }
     }
     
     // muda etapa e redireciona conforme q validade dos dados
-    if($evento_id=="" || ((strlen($evento_nome))<1)){
+    if($evento_id=="" || ((strlen($evento_nome))<1) || ($cliente_id<1)){
 
         $_SESSION['invalid']=1;
         $_SESSION['etapa'] = 1;     
