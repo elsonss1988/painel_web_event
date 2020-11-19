@@ -113,6 +113,17 @@ if($etapa == 1){
 // Adiciona convidados e personalização
 # Abre Etapa 2
 if($etapa == 2){
+
+    $get_convidados = get_convidados($evento_id);
+    $_SESSION['list_convidados'] = array();
+    $i = 0;
+    if ($get_convidados->num_rows > 0) {
+        while($row = $get_convidados->fetch_assoc()) { 
+            $_SESSION['list_convidados'][$i] = $row;
+            $i++;
+        }
+    }
+
     $evento_id = $_SESSION['evento_id'];
     
     if(!isset($_GET['f'])){
@@ -183,7 +194,7 @@ if($etapa == 2){
         $personalizacao_logo = $_FILES['personalizacao_logo'];
         $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
         $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
-        if((isset($_POST['tipo_de_convidados'])) && (array_count_values($_SESSION['list_convidados'])>0)){
+        if((isset($_POST['tipo_de_convidados'])) && (count($_SESSION['list_convidados'])>0)){
             $tipo_de_convidados = mysqli_real_escape_string($link, $_POST['tipo_de_convidados']);
         } else {
             $tipo_de_convidados = 0;
