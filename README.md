@@ -43,14 +43,6 @@ Em desenvovilmento
 
 ## Testes
 
--Pegando ID ao selecionar Cliente
-*Destruir valor para enviar via post ao selecionar campos escondidos (linha133)
- if checkbox ok get (idcliente) else generator
-
-** Testes
-
-Etapa1
-
 #Cliente ok
 -Sem Cliente [Não avança] ok
 -Selecionado apenas Cliente ( Seleciona) [better] corrigir no campo evento
