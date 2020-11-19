@@ -38,6 +38,18 @@ if($etapa == 1){
         $_SESSION['cliente_responsavel']=$cliente_responsavel;
         $cliente_logo = $_FILES['cliente_logo'];
         $_SESSION['cliente_logo']=$cliente_logo;
+        
+        if(isset($_POST['newClient'])){
+            unset($_SESSION['cliente_nome']);
+            unset($_SESSION['cliente_site']);
+            unset($_SESSION['cliente_responsavel']);
+            unset($_SESSION['cliente_logo']);
+
+            $cliente_nome='';
+            $cliente_site='';
+            $cliente_responsavel ='';
+            $cliente_logo ='';
+        }
         if((strlen($cliente_nome))>1){
             $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
         }else{
@@ -56,6 +68,17 @@ if($etapa == 1){
     
     $_SESSION['msg'] = strlen($evento_nome)>1;
     $_SESSION['cliente_id']=$cliente_id;
+
+    if(isset($_POST['newEvent'])){
+        unset($_SESSION['evento_nome']);
+        unset($_SESSION['evento_data']);
+        unset($_SESSION['evento_hora']);
+
+        $evento_nome='';
+        $evento_data='';
+        $evento_hora='';
+    }
+
     // insere o novo evento e retorna id
     if((strlen($evento_nome))>1){
         if($_SESSION['evento_id']==0){
