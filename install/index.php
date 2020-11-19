@@ -161,6 +161,7 @@ if(isset($_SESSION['etapa'])){
 										</label>
 									</div>
 								</div>
+								<button class="btn btn-primary" type="submit" value="Reset" name="newClient">Adicionar Novo Cliente</button>
 							</div>
 														
 						</div>
@@ -182,6 +183,7 @@ if(isset($_SESSION['etapa'])){
 								<label for="evento_hora" class="form-label">Hora</label>
 								<input type="time" class="form-control" data-mask="00:00" name="evento_hora" id="evento_hora" required="true" value="<?php echo $_SESSION['evento_hora']?>">
 							</div>
+							<button class="btn btn-primary" type="" value="submit" name="newEvent">Adicionar Novo Evento</button>
 						</div>
 
 						<?php 
@@ -573,7 +575,7 @@ if(isset($_SESSION['etapa'])){
 					<div class="col-12 mt-5 mb-5">
 						<hr>
 						<input type="hidden" name="etapa" value="<?php echo $_SESSION['etapa'];?>">
-						<button class="btn btn-primary" type="submit" value="Reset">Reset</button>
+						<!-- <button class="btn btn-primary" type="submit" value="Reset">Reset</button> -->
 						<!-- Região de Manipulação do retornar -->
 						<?php 
 						if($_SESSION['etapa'] > 1){								
