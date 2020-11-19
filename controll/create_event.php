@@ -18,17 +18,22 @@ $etapa = $_SESSION['etapa'];
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){								 
+    if(isset($_POST['tipo_de_cliente'])){
+        $_SESSION['tipo_de_cliente']='1';
+        $_SESSION['checkbox_Client']='checked';			
+        //Mantem checado						 
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
             $cliente_id = "";            
-        } else{
+        }else{
             //Cliente selecionado seta varivel par ao stament
             $cliente_id = mysqli_real_escape_string($link, $_POST['cliente_id']);
             #$_SESSION['cliente_id']=$cliente_id;
         }
     }else{
+        $_SESSION['tipo_de_cliente']='0';
+        $_SESSION['checkbox_Client']='';		
         //Caso checkbox desmarcado cadastrar o cliente
         $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
         $_SESSION['cliente_nome']=$cliente_nome;
@@ -50,7 +55,9 @@ if($etapa == 1){
             $cliente_responsavel ='';
             $cliente_logo ='';
         }
-        if((strlen($cliente_nome))>1){
+        if($_SESSION['cliente_id']>1){
+            $cliente_id=$_SESSION['cliente_id'];
+        }elseif((strlen($cliente_nome))>1){
             $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
         }else{
             $cliente_id=0;

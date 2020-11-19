@@ -11,6 +11,10 @@ isset($_SESSION['list_convidados'])?$_SESSION['list_convidados']:$_SESSION['list
 isset($_SESSION['cliente_id'])?$_SESSION['cliente_id']:$_SESSION['cliente_id']=0;
 isset($_SESSION['evento_id'])?$_SESSION['evento_id']:$_SESSION['evento_id']=0;
 isset($_SESSION['msg'])?$_SESSION['msg']:$_SESSION['msg']=0;
+isset($_SESSION['retornar'])?$_SESSION['retornar']:$_SESSION['retornar']='0';
+isset($_SESSION['checkbox_Client'])?$_SESSION['checkbox_Client']:$_SESSION['checkbox_Client']='checked';
+isset($_SESSION['tipo_de_cliente'])?$_SESSION['tipo_de_cliente']:$_SESSION['tipo_de_cliente']='1';
+
 
 //Client Hold
 isset($_SESSION['cliente_nome'])?$_SESSION['cliente_nome']:$_SESSION['cliente_nome']='';
@@ -28,6 +32,8 @@ if(isset($_SESSION['etapa'])){
 	echo "Evento ID".$_SESSION['evento_id'];
 	echo"<br>";
 	echo "Cliente ID".$_SESSION['cliente_id'];
+	echo"<br>";
+	echo "Live ID".$_SESSION['cliente_id'];
 	echo"<br>";
     echo "Message:".$_SESSION['msg'];
 }
@@ -117,7 +123,8 @@ if(isset($_SESSION['etapa'])){
 						<div id="campo_clientes" class="row g-3">
 							<h2 class="display-2">Cliente</h2>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" id="tipo_de_cliente" name="tipo_de_cliente" value="1" checked onchange="checkbox_fields('cliente')">
+								<input class="form-check-input" type="checkbox" id="tipo_de_cliente" name="tipo_de_cliente" value=1 checked  onchange="checkbox_fields('cliente')">
+								<!-- value=<?php echo $_SESSION['tipo_de_cliente']?>; <?php echo $_SESSION['checkbox_Client'];?> -->
 								<label class="form-check-label" for="tipo_de_cliente">Cliente já cadastrado</label>
 							</div>
 							<div class="row g-3" id="campos_mostrar_cliente">
