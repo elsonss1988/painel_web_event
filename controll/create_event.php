@@ -18,17 +18,22 @@ $etapa = $_SESSION['etapa'];
 if($etapa == 1){
     $_SESSION["count"]=1;
     //Destruir valor a selecionar campos escondidos (linha133)
-    if(isset($_POST['tipo_de_cliente'])){								 
+    if(isset($_POST['tipo_de_cliente'])){
+        $_SESSION['tipo_de_cliente']='1';
+        $_SESSION['checkbox_Client']='checked';			
+        //Mantem checado						 
         // verifica se já tem cliente
         if(!isset($_POST['cliente_id'])){
             //Não foi selecionado um cliente
             $cliente_id = "";            
-        } else{
+        }else{
             //Cliente selecionado seta varivel par ao stament
             $cliente_id = mysqli_real_escape_string($link, $_POST['cliente_id']);
             #$_SESSION['cliente_id']=$cliente_id;
         }
     }else{
+        $_SESSION['tipo_de_cliente']='0';
+        $_SESSION['checkbox_Client']='';		
         //Caso checkbox desmarcado cadastrar o cliente
         $cliente_nome = mysqli_real_escape_string($link, $_POST['cliente_nome']);
         $_SESSION['cliente_nome']=$cliente_nome;
@@ -44,13 +49,16 @@ if($etapa == 1){
             unset($_SESSION['cliente_site']);
             unset($_SESSION['cliente_responsavel']);
             unset($_SESSION['cliente_logo']);
+            unset($_SESSION['cliente_id']);
 
             $cliente_nome='';
             $cliente_site='';
             $cliente_responsavel ='';
             $cliente_logo ='';
         }
-        if((strlen($cliente_nome))>1){
+        if($_SESSION['cliente_id']>1){
+            $cliente_id=$_SESSION['cliente_id'];
+        }elseif((strlen($cliente_nome))>1){
             $cliente_id = add_cliente($cliente_nome, $cliente_site, $cliente_responsavel, $cliente_logo);
         }else{
             $cliente_id=0;
@@ -73,6 +81,7 @@ if($etapa == 1){
         unset($_SESSION['evento_nome']);
         unset($_SESSION['evento_data']);
         unset($_SESSION['evento_hora']);
+        unset($_SESSION['evento_id']);
 
         $evento_nome='';
         $evento_data='';
@@ -106,6 +115,17 @@ if($etapa == 1){
 // Adiciona convidados e personalização
 # Abre Etapa 2
 if($etapa == 2){
+
+    $get_convidados = get_convidados($evento_id);
+    $_SESSION['list_convidados'] = array();
+    $i = 0;
+    if ($get_convidados->num_rows > 0) {
+        while($row = $get_convidados->fetch_assoc()) { 
+            $_SESSION['list_convidados'][$i] = $row;
+            $i++;
+        }
+    }
+
     $evento_id = $_SESSION['evento_id'];
     
     if(!isset($_GET['f'])){
@@ -176,7 +196,7 @@ if($etapa == 2){
         $personalizacao_logo = $_FILES['personalizacao_logo'];
         $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
         $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
-        if((isset($_POST['tipo_de_convidados'])) && (array_count_values($_SESSION['list_convidados'])>0)){
+        if((isset($_POST['tipo_de_convidados'])) && (count($_SESSION['list_convidados'])>0)){
             $tipo_de_convidados = mysqli_real_escape_string($link, $_POST['tipo_de_convidados']);
         } else {
             $tipo_de_convidados = 0;
