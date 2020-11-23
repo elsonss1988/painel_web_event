@@ -49,6 +49,7 @@ if($etapa == 1){
             unset($_SESSION['cliente_site']);
             unset($_SESSION['cliente_responsavel']);
             unset($_SESSION['cliente_logo']);
+            unset($_SESSION['cliente_id']);
 
             $cliente_nome='';
             $cliente_site='';
@@ -80,6 +81,7 @@ if($etapa == 1){
         unset($_SESSION['evento_nome']);
         unset($_SESSION['evento_data']);
         unset($_SESSION['evento_hora']);
+        unset($_SESSION['evento_id']);
 
         $evento_nome='';
         $evento_data='';
