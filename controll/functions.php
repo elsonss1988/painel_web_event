@@ -79,10 +79,6 @@ function replace_evento($cliente_id, $evento_nome, $evento_data, $evento_hora,$e
 ;
 }
 
-
-
-
-
 // Pega todos os convidados da live
 function get_convidados($evento_id){
     require '../connect/connect.php';
@@ -155,7 +151,6 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
-
 // Adiciona uma linha na tabela configuracao
 function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
@@ -168,6 +163,7 @@ function insert_linha_configuracao($evento_id){
         return 0;
     }
 }
+
 // Adiciona dados de interação
 function add_interacao($evento_id, $interacao_perguntas, $interacao_codigo){
     require '../connect/connect.php';
