@@ -27,6 +27,12 @@ isset($_SESSION['evento_nome'])?$_SESSION['evento_nome']:$_SESSION['evento_nome'
 isset($_SESSION['evento_data'])?$_SESSION['evento_data']:$_SESSION['evento_data']='';
 isset($_SESSION['evento_hora'])?$_SESSION['evento_hora']:$_SESSION['evento_hora']='';
 
+//personalização
+isset($_SESSION['$personalizacao_bg'])?$_SESSION['$personalizacao_bg']:$_SESSION['$personalizacao_bg']='';
+isset($_SESSION['$personalizacao_logo'])?$_SESSION['$personalizacao_logo']:$_SESSION['$personalizacao_logo']='';
+isset($_SESSION['$personalizacao_cor1'])?$_SESSION['$personalizacao_cor1']:$_SESSION['$personalizacao_cor1']='#ff5f0a';
+isset($_SESSION['$personalizacao_cor2'])?$_SESSION['$personalizacao_cor2']:$_SESSION['$personalizacao_cor2']='#ff8d50';
+
 
 if(isset($_SESSION['etapa'])){
 	echo "Evento ID".$_SESSION['evento_id'];
@@ -163,7 +169,11 @@ if(isset($_SESSION['etapa'])){
 									<div class="form-file">
 										<input type="file" class="form-file-input" name="cliente_logo" id="cliente_logo" >
 										<label class="form-file-label" for="cliente_logo">
-											<span class="form-file-text">Inserir logo da empresa...</span>
+											<span class="form-file-text"><?php echo 'Inserir logo da empresa...';?></span>
+											
+											<!-- <span class="form-file-text"><?php #isset($_FILES['cliente_logo'])?$_FILES['cliente_logo']['name']:'Inserir logo da empresa...';?></span>											 -->
+											<!-- <?php #echo $_FILES['fileToUpload']['name']:'Inserir logo da empresa...'?> -->
+
 											<span class="form-file-button">Procurar</span>
 										</label>
 									</div>
@@ -293,11 +303,11 @@ if(isset($_SESSION['etapa'])){
 							</div>
 							<div class="col-md-2">
 								<label for="personalizacao_cor1" class="form-label">Cor Principal</label>
-								<input type="color" class="form-control form-control-color" id="personalizacao_cor1" name="personalizacao_cor1" value="#ff5f0a" title="Choose your color">
+								<input type="color" class="form-control form-control-color" id="personalizacao_cor1" name="personalizacao_cor1" value=<?php $_SESSION['$personalizacao_cor1']?> title="Choose your color">
 							</div>
 							<div class="col-md-2">
 								<label for="personalizacao_cor2" class="form-label">Secundária</label>
-								<input type="color" class="form-control form-control-color" id="personalizacao_cor2" name="personalizacao_cor2" value="#ff8d50" title="Choose your color">
+								<input type="color" class="form-control form-control-color" id="personalizacao_cor2" name="personalizacao_cor2" value=<?php $_SESSION['$personalizacao_cor2']?> title="Choose your color">
 							</div>
 						</div>					
 						<?php
