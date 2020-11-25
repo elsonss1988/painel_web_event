@@ -189,3 +189,33 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 }
 
 // Adiciona cadastro
+function add_cadastro($evento_id, $cadastroJson){
+    require '../connect/connect.php';
+    $_SESSION['msg'] = $cadastroJson;
+    $sql = "UPDATE `configuracoes` SET campos_cadastro = '$cadastroJson' WHERE lives_idlives = $evento_id";
+    if (mysqli_query($link, $sql)){
+        return 1;
+    }else {
+        return 0;
+    }
+}
+
+//Adiciona login
+function add_login($evento_id, $campos_login){
+    require '../connect/connect.php'
+    $sql = "UPDATE `configuracoes` SET campos_login = '$campos_login' WHERE lives_idlives = $evento_id";
+    if (mysqli_query($link, $sql)){
+        return mysqli_insert_id($link);
+    }else {
+        return o;
+    }
+}
+
+//Adiciona mensegens
+function add_mensagem($evento_id, $texto_email_cadastro, $texto_email_nova_senha){
+    require '../connect/connect.php';
+    $sql = ("UPDATE `configuracoes` SET `mensagem_cadastro` = '$texto_email_cadastro', `mensagem_reset_email` = '$texto_email_nova_senha'  WHERE lives_idlives = $evento_id");
+    mysqli_query($link, $sql);
+    mysqli_close($link);
+
+}
