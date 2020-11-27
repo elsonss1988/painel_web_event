@@ -193,15 +193,15 @@ if($etapa == 2){
             }
         }
     } else {
-        $personalizacao_bg = $_FILES['personalizacao_bg'];
-        $personalizacao_logo = $_FILES['personalizacao_logo'];
-        $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
-        $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
+        // $personalizacao_bg = $_FILES['personalizacao_bg'];
+        // $personalizacao_logo = $_FILES['personalizacao_logo'];
+        // $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
+        // $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
 
-        isset($_SESSION['$personalizacao_bg'])?$personalizacao_bg=$_SESSION['$personalizacao_bg']:$_SESSION['$personalizacao_bg']=$personalizacao_bg;
-        isset($_SESSION['$personalizacao_logo'])?$personalizacao_logo=$_SESSION['$personalizacao_logo']:$_SESSION['$personalizacao_logo']=$personalizacao_logo;
-        isset($_SESSION['$personalizacao_cor1'])?$personalizacao_cor1=$_SESSION['$personalizacao_cor1']:$_SESSION['$personalizacao_cor1']=$personalizacao_cor1;
-        isset($_SESSION['$personalizacao_cor2'])?$personalizacao_cor2=$_SESSION['$personalizacao_cor2']:$_SESSION['$personalizacao_cor2']=$personalizacao_cor2;
+        // isset($_SESSION['$personalizacao_bg'])?$personalizacao_bg=$_SESSION['$personalizacao_bg']:$_SESSION['$personalizacao_bg']=$personalizacao_bg;
+        // isset($_SESSION['$personalizacao_logo'])?$personalizacao_logo=$_SESSION['$personalizacao_logo']:$_SESSION['$personalizacao_logo']=$personalizacao_logo;
+        // isset($_SESSION['$personalizacao_cor1'])?$personalizacao_cor1=$_SESSION['$personalizacao_cor1']:$_SESSION['$personalizacao_cor1']=$personalizacao_cor1;
+        // isset($_SESSION['$personalizacao_cor2'])?$personalizacao_cor2=$_SESSION['$personalizacao_cor2']:$_SESSION['$personalizacao_cor2']=$personalizacao_cor2;
 
         $_SESSION['msg']=$_SESSION['$personalizacao_cor2'];
 
