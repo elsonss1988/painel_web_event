@@ -116,6 +116,8 @@ if($etapa == 1){
 # Abre Etapa 2
 if($etapa == 2){
 
+   
+    
     $evento_id = $_SESSION['evento_id'];   
     $get_convidados = get_convidados($evento_id);
     $_SESSION['list_convidados'] = array();
@@ -193,17 +195,14 @@ if($etapa == 2){
             }
         }
     } else {
-        // $personalizacao_bg = $_FILES['personalizacao_bg'];
-        // $personalizacao_logo = $_FILES['personalizacao_logo'];
-        // $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
-        // $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
+        $personalizacao_bg = $_FILES['personalizacao_bg'];
+        $personalizacao_logo = $_FILES['personalizacao_logo'];
+        $personalizacao_cor1 = mysqli_real_escape_string($link, $_POST['personalizacao_cor1']);
+        $personalizacao_cor2 = mysqli_real_escape_string($link, $_POST['personalizacao_cor2']);
 
-        // isset($_SESSION['$personalizacao_bg'])?$personalizacao_bg=$_SESSION['$personalizacao_bg']:$_SESSION['$personalizacao_bg']=$personalizacao_bg;
-        // isset($_SESSION['$personalizacao_logo'])?$personalizacao_logo=$_SESSION['$personalizacao_logo']:$_SESSION['$personalizacao_logo']=$personalizacao_logo;
-        // isset($_SESSION['$personalizacao_cor1'])?$personalizacao_cor1=$_SESSION['$personalizacao_cor1']:$_SESSION['$personalizacao_cor1']=$personalizacao_cor1;
-        // isset($_SESSION['$personalizacao_cor2'])?$personalizacao_cor2=$_SESSION['$personalizacao_cor2']:$_SESSION['$personalizacao_cor2']=$personalizacao_cor2;
 
-        $_SESSION['msg']=$_SESSION['$personalizacao_cor2'];
+
+        // var_dump($_SESSION);
 
         if((isset($_POST['tipo_de_convidados'])) && (count($_SESSION['list_convidados'])>0)){
             $tipo_de_convidados = mysqli_real_escape_string($link, $_POST['tipo_de_convidados']);
@@ -219,7 +218,7 @@ if($etapa == 2){
             }
             else{
                 $_SESSION['etapa'] = 3;
-                unset($_SESSION['list_convidados']);
+                //unset($_SESSION['list_convidados']);
                 $evento_id = $_SESSION['evento_id'];
                 $insert_linha_configuracao = insert_linha_configuracao($evento_id);
             }           

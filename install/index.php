@@ -44,6 +44,13 @@ if(isset($_SESSION['etapa'])){
     echo "Message:".$_SESSION['msg'];
 }
 
+// if($_SESSION['etapa']<4){
+// 	echo "<br>";
+// 	echo ''.print_r($_SESSION['list_convidados']);
+// 	echo"<br>";
+// 	echo ''.var_dump($_SESSION);
+// }
+
 ?>
 
 <!doctype html>
