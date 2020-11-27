@@ -79,10 +79,6 @@ function replace_evento($cliente_id, $evento_nome, $evento_data, $evento_hora,$e
 ;
 }
 
-
-
-
-
 // Pega todos os convidados da live
 function get_convidados($evento_id){
     require '../connect/connect.php';
@@ -155,7 +151,6 @@ function add_personalizacao($evento_id, $personalizacao_bg, $personalizacao_logo
     }
 }
 
-
 // Adiciona uma linha na tabela configuracao
 function insert_linha_configuracao($evento_id){
     require '../connect/connect.php';
@@ -168,6 +163,7 @@ function insert_linha_configuracao($evento_id){
         return 0;
     }
 }
+
 // Adiciona dados de interação
 function add_interacao($evento_id, $interacao_perguntas, $interacao_codigo){
     require '../connect/connect.php';
@@ -193,19 +189,18 @@ function add_transmissao($evento_id, $transmissao_player1, $transmissao_player2,
 }
 
 // Adiciona cadastro
-function add_cadastro($evento_id,$cadastroJson){
-    require '../connect/connect.php';
-    #$sql="INSERT INTO configuracoes (lives_idlives,player1,campos_cadastro) VALUES (1000,'MegaPlay','$cadastroJson')";
-    $_SESSION['msg']=$cadastroJson;
-    $sql="UPDATE configuracoes SET campos_cadastro='$cadastroJson' WHERE lives_idlives =$evento_id";
 
-    if (mysqli_query($link, $sql)) {
+function add_cadastro($evento_id, $cadastroJson){
+    require '../connect/connect.php';
+    $_SESSION['msg'] = $cadastroJson;
+    $sql = "UPDATE `configuracoes` SET campos_cadastro = '$cadastroJson' WHERE lives_idlives = $evento_id";
+    if (mysqli_query($link, $sql)){
         return 1;
-    } 
-    else {
+    }else {
         return 0;
     }
 }
+
 
 // Adiciona login
 function add_login($evento_id, $campos_login){
@@ -227,6 +222,7 @@ function add_mensagem($evento_id,$texto_email_cadastro,$texto_email_nova_senha){
     mysqli_close($link);
 
 }
+
 
 
 

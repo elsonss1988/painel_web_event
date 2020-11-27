@@ -251,18 +251,33 @@ if($etapa == 3){
     $transmissao_traducao = mysqli_real_escape_string($link, $_POST['transmissao_traducao']);
     $add_interacao_tranmissao = add_interacao($evento_id, $interacao_perguntas, $interacao_codigo);
     $add_transmissao = add_transmissao($evento_id, $transmissao_player1, $transmissao_player2, $transmissao_traducao);
-    if((strlen($transmissao_player1))>1){
-        $_SESSION['etapa'] = 4;
-        $_SESSION['invalid']=0;
-    }
-    else if(isset($_POST['retornar'])){
-        $_SESSION['etapa']=$_SESSION['etapa']-1;
-        $_SESSION['msg']=$_SESSION['etapa'];      
-        header('Location: ../install/');             
+    
+    if(isset($_POST['tipo_de_interacao'])){
+        if((strlen($transmissao_player1))>1 && (strlen($interacao_codigo))>1){
+            $_SESSION['etapa'] = 4;
+            $_SESSION['invalid']=0;
+        }else if(isset($_POST['retornar'])){
+            $_SESSION['etapa']=$_SESSION['etapa']-1;
+            $_SESSION['msg']=$_SESSION['etapa'];      
+            header('Location: ../install/');             
+        }else{
+            $_SESSION['invalid']=1;
+        }
     }else{
-        $_SESSION['invalid']=1;
+        if((strlen($transmissao_player1))>1){
+            $_SESSION['etapa'] = 4;
+            $_SESSION['invalid']=0;
+        }else if(isset($_POST['retornar'])){
+            $_SESSION['etapa']=$_SESSION['etapa']-1;
+            $_SESSION['msg']=$_SESSION['etapa'];      
+            header('Location: ../install/');             
+        }else{
+            $_SESSION['invalid']=1;
+        }
     }
+    
 }
+
 if($etapa == 4){
     
         $cadastro= new stdClass;    
@@ -311,6 +326,7 @@ if($etapa == 4){
         }
 
     }
+
 if($etapa == 5){
     $evento_id = $_SESSION['evento_id'];
 
