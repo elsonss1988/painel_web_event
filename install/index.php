@@ -2,8 +2,6 @@
 <?php 
 session_start();
 
-
-
 isset($_SESSION['fail'])?$_SESSION['fail']=1:$_SESSION['fail']=0;
 isset($_SESSION['invalid'])?$_SESSION['invalid']:$_SESSION['invalid']=0;
 isset($_SESSION['etapa'])?$_SESSION['etapa']:$_SESSION['etapa']=1;
@@ -26,12 +24,6 @@ isset($_SESSION['cliente_logo'])?$_SESSION['cliente_logo']:$_SESSION['cliente_lo
 isset($_SESSION['evento_nome'])?$_SESSION['evento_nome']:$_SESSION['evento_nome']='';
 isset($_SESSION['evento_data'])?$_SESSION['evento_data']:$_SESSION['evento_data']='';
 isset($_SESSION['evento_hora'])?$_SESSION['evento_hora']:$_SESSION['evento_hora']='';
-
-//personalização
-isset($_SESSION['$personalizacao_bg'])?$_SESSION['$personalizacao_bg']:$_SESSION['$personalizacao_bg']='';
-isset($_SESSION['$personalizacao_logo'])?$_SESSION['$personalizacao_logo']:$_SESSION['$personalizacao_logo']='';
-isset($_SESSION['$personalizacao_cor1'])?$_SESSION['$personalizacao_cor1']:$_SESSION['$personalizacao_cor1']='#ff5f0a';
-isset($_SESSION['$personalizacao_cor2'])?$_SESSION['$personalizacao_cor2']:$_SESSION['$personalizacao_cor2']='#ff8d50';
 
 
 if(isset($_SESSION['etapa'])){
@@ -322,7 +314,7 @@ if(isset($_SESSION['etapa'])){
 							</div>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-								<label class="form-check-label" for="tipo_de_interacao">Slido, Vevox, Vimeo, outros...</label>
+								<label class="form-check-label" for="tipo_de_interacao">Slido, Vevox, Vimeo, outros...*</label>
 								<input class="form-check-input" type="checkbox" name="tipo_de_interacao" id="tipo_de_interacao" checked onchange="checkbox_fields('interacao'); nocheck('tipo_de_interacao', 'interacao_perguntas');">
 							</div>
 							<div class="row g-3" id="campos_mostrar_interacao">
@@ -339,7 +331,7 @@ if(isset($_SESSION['etapa'])){
 						<div id="campo_transmissao" class="row g-3">
 							<h2 class="display-2 mt-5 pt-5">Transmissão</h2>
 							<div class="col-md-12 pt-3">
-								<label for="transmissao_player1" class="form-label">Código do Player Principal</label>
+								<label for="transmissao_player1" class="form-label">Código do Player Principal*</label>
 								<textarea type="text" class="form-control" name="transmissao_player1" id="transmissao_player1" rows="2" required></textarea>
 							</div>
 							<div class="col-md-12 pt-3">
@@ -354,7 +346,7 @@ if(isset($_SESSION['etapa'])){
 						<?php 
 							if($_SESSION['invalid']==1){							
 								echo "<script>var myToast = Toastify({
-								text: 'Informe o Player Principal',
+								text: 'Preencha os campos obrigatórios',
 								duration: 5000
 						        })
 							    myToast.showToast();
